@@ -4,7 +4,7 @@ import insta from './images/Insta.jpg';
 import linkdin from './images/Lnkdin.jpg';
 function footer() {
     return (
-        <div id='bc' class='container-breakpoint ys'>
+        <div id='bc' class='container-breakpoint xs ys'>
             <div  className="container footer-container text-center">
                 <div className="row text-center">
                     <a className="col" href="https://www.facebook.com/Acecraft-2420817978140298/">
@@ -34,7 +34,7 @@ function footer() {
                         <div id='border'class="col ">
                         TERMS
                         </div>
-                        <div id='border' class="col">
+                        <div  class="col">
                         GET HELP
                         </div>
                     </div>

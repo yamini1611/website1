@@ -1,0 +1,24 @@
+#div{
+    padding-top: 150px;
+    padding-bottom: 400px;
+    padding-left: 90px;
+    font-family:sans-serif;
+    background-color: black;  
+    color: #999393;
+}
+h1{
+   font-size: 37px;
+    padding-bottom: 5px;
+    
+}
+
+h3{
+    font-weight: 200;
+    font-size: 23.5px;
+}
+
+#link{
+    color: #fcfcfc;
+    font-size: 15.5px;
+
+}

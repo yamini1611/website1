@@ -1,12 +1,15 @@
 import React from "react";
 import setting from './images/setting.png';
+import { Link } from 'react-router-dom';
+
+
 
 const Home = () => {
     return (
         <div>
             <div class="fixed-top">
                 <header>
-                    <h1 id='title'>acecraft</h1>
+                    <Link to='/'><h1 id='title'>acecraft</h1></Link>
                     <nav class="navbar navbar-expand-lg navbar-light ">
                         <div class="container-fluid">
 
@@ -16,27 +19,27 @@ const Home = () => {
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a ID='nav' style={{ paddingLeft: "10px" }} class="nav-link active" aria-current="page" href="https://www.acecraft.in/page/school">SCHOOL</a>
+                                        <Link ID='nav' style={{ paddingLeft: "10px" }} class="nav-link active" aria-current="page" to="/School" >SCHOOL</Link>
                                     </li>
                                     <li class="nav-item">
-                                        <a ID='nav' style={{ paddingLeft: "25px" }} class="nav-link" href="#https://www.acecraft.in/page/college">COLLEGE</a>
+                                        <Link ID='nav' style={{ paddingLeft: "25px" }} class="nav-link" to="/College">COLLEGE</Link>
                                     </li>
                                     <li class="nav-item">
-                                        <a ID='nav' style={{ paddingLeft: "25px" }} class="nav-link" href="https://www.acecraft.in/page/enterprise">ENTERPRISE</a>
+                                        <Link ID='nav' style={{ paddingLeft: "25px" }} class="nav-link" to="/Enterprise">ENTERPRISE</Link>
                                     </li>
                                     <li class="nav-item">
-                                        <a ID='nav' style={{ paddingLeft: "25px" }} class="nav-link 
-                                        " href="https://www.acecraft.in/blog">NOTES</a>
+                                        <Link ID='nav' style={{ paddingLeft: "25px" }} class="nav-link notes
+                                        " to="/Notes">NOTES</Link>
                                     </li>
                                     <li class="nav-item">
-                                        <a ID='nav' style={{ paddingLeft: "25px" }} class="nav-link " href="https://www.acecraft.in/product/airen-mask#" >ARIEN MASK</a>
+                                        <Link ID='nav' style={{ paddingLeft: "25px" }} class="nav-link " to="/Arien-mask" >ARIEN MASK</Link>
                                     </li>
                                     <li>
-                                        
-                                            <img  style={{ marginTop:-11 ,marginLeft:300}} id='setting' src={setting} alt=""></img>
-                                         
-                                   
-                                        <i id='fa' style={{ paddingLeft:45, marginTop:11 }} class="fa-sharp fa-solid fa-cart-shopping"> <span id='badge' style={{ fontSize: "12px"}} class="position-absolute top-0 start-100 translate-middle badge rounded-pill">0</span>
+
+                                        <img style={{ marginTop: -11, marginLeft: 300 }} id='setting' src={setting} alt=""></img>
+
+
+                                        <i id='fa' style={{ paddingLeft: 45, marginTop: 11 }} class="fa-sharp fa-solid fa-cart-shopping"> <span id='badge' style={{ fontSize: "12px" }} class="position-absolute top-0 start-100 translate-middle badge rounded-pill">0</span>
                                         </i>
 
                                     </li>

@@ -15,7 +15,17 @@ header{
 background-color: black;
 padding-right: 20px;
 }
-
+.notes::after {
+  content: "";
+  display: inline-block;
+  background: #8596ff;
+  width: 6px;
+  height: 6px;
+  border-radius: 4px;
+  position: relative;
+  top: -3px;
+  left: 10px;
+}
 /* NAVBAR */
 #navbarNav{
   margin-left: -90px;
@@ -33,7 +43,7 @@ padding-right: 20px;
 }
 
 #navbarNav{
-  padding-left: 500px;
+  padding-left: 490px;
   
 }
 
@@ -61,6 +71,7 @@ padding-right: 20px;
 #nav:hover{
   color:beige !important;
   font-weight: bolder;
+  
 }
 
 
@@ -165,7 +176,7 @@ padding-right: 20px;
  right: 30%;
  left: 43%;
  bottom: 1%;
- top:57%;
+ top:45%;
  font-size: 36px;
  color: #8f8585;
 }
@@ -176,7 +187,7 @@ padding-right: 20px;
  left: 32%;
  bottom: 55%;
  margin-bottom: -35px;
- top:65%;
+ top:50%;
  font-size:33px;
  font-family: logo-bold;
  border: solid;
@@ -195,7 +206,7 @@ padding-right: 20px;
   left: 28%;
   bottom: 58%;
   margin-bottom: -15px;
-  top:78%;
+  top:58%;
   font-size:18px;
   border-width: 0.01ch;
   padding-top: 50px;
@@ -211,7 +222,7 @@ padding-right: 20px;
   left: 59%;
   bottom: 58%;
   margin-bottom: -15px;
-  top:77.5%;
+  top:57.6%;
   font-size:18px;
   border-width: 0.01ch;
   padding-top: 50px;
@@ -228,7 +239,7 @@ padding-right: 20px;
   left: 63.5%;
   bottom: 58%;
   margin-bottom: -15px;
-  top:77.5%;
+  top:57.6%;
   font-size:18px;
   border-width: 0.01ch;
   padding-top: 50px;
@@ -272,6 +283,7 @@ padding-right: 20px;
   color: #9e9999;
   font-family: logo;
   font-weight: 100;
+  width: 1200px;
 }
 
 
@@ -281,20 +293,20 @@ padding-right: 20px;
   height: 35px;
   margin-left: 460px;
   margin-right: -10px;
-  margin-top: 3px;
+  margin-top: 21px;
 
 
 }
 
 #insta{
-  margin-top: -5px;
+  margin-top: 16px;
   margin-left: -250px;
 }
 
 #ld{
   margin-left: -785px;
   height: 80px;
-  margin-top: -20px;
+  margin-top: 0px;
 
 }
 
