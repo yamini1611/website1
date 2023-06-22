@@ -1,0 +1,146 @@
+#img-banner{
+    margin-top:100px;
+    position: relative;
+}
+
+@font-face {
+    font-family: logo-bold;
+    src: url(/src/components/fonts/Fontspring-DEMO-proximanova-bold.otf);
+  }
+
+  @font-face {
+    font-family:thin1 ;
+    src: url(./fonts/Fontspring-DEMO-proximanova-thin.otf);
+  }
+#h3{
+    position: absolute;
+}
+
+#firsttext{
+    margin-top: -350px;
+    font-family: logo-bold;
+    font-size:40px;
+    margin-left: 850px;
+    color: rgb(141, 141, 138);
+
+}
+
+#pre{
+    font-size: 18px;
+    font-family:thin1;
+    
+    font-weight:bolder;
+    line-height: 9px;
+    color: rgb(141, 139, 139);
+}
+
+#content{
+    padding-top: 50px;
+    background-color: rgb(179, 179, 179);
+    padding-bottom: 70px;
+    
+}
+#container {
+    display:inline-flex;
+    margin-left: 600px;
+    padding-left: 200px;
+    padding-top: 10px;
+    width: 600px;
+  }
+  
+  #col {
+    display:grid;
+    margin-left: 2px;
+    padding-right: 10px;
+
+  }
+
+  h2{
+    font-size: 25px;
+    color: rgb(146, 146, 143);
+    font-family: logo-bold;
+    
+  }
+  
+  
+#img1{
+    margin-left: 470px;
+}
+
+#heading{
+    font-family: logo-bold;
+    color:rgb(150, 144, 144);
+    margin-left:520px;
+    margin-top: 20px;
+    font-size:35px;
+    padding-bottom: 8px;
+}
+
+
+#con{
+    line-height: 3px;  
+    margin-left: 500px;
+}
+
+
+
+#img2{ 
+    margin-top: 120px;
+    margin-left: 300px;
+}
+
+#img3{
+    margin-left: 900px;
+    margin-top: 120px;
+
+}
+
+#img4{
+    margin-top: 120px;
+    margin-left: 200px;
+    position: relative;
+}
+
+#h5{
+    position: absolute;
+    margin-top: -290px;
+    margin-left: 620px;
+    color:rgb(150, 144, 144);
+    font-family:thin1;
+    font-size: 18px;
+    font-weight: bolder;
+}
+@font-face {
+    font-family:thin1 ;
+    src: url(/src/components/fonts/Fontspring-DEMO-proximanova-thin.otf);
+  }
+#h2{
+    position: absolute;
+    margin-top: -250px;
+    margin-left: 620px;
+    font-size: 35px;
+}
+
+#para{
+    position: absolute;
+    margin-top: -150px;
+    margin-left: 580px;
+    color:rgb(150, 144, 144);
+
+}
+
+#bg{
+    background-color: black;
+    padding-top: 60px;
+    --mdb-gutter-x: 0rem;
+    padding-right: 100px;
+    padding-bottom: 50px;
+}
+
+#p{
+    margin-left: 90px;
+    color: grey;
+    font-size: 18px;
+    margin-top: 20px;
+
+}
