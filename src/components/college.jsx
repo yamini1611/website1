@@ -9,6 +9,9 @@ import cover from './images/making-banner.jpg'
 import caro1 from './images/caro1.png'
 import caro2 from './images/caro2.png'
 import caro3 from './images/caro3.png'
+import con3 from './images/College-3.jpg'
+
+
 
 function College() {
     return (
@@ -106,8 +109,9 @@ export function Logo() {
 }
 
 export function Black() {
+  
     return (
-        <div id='bg' className="row w-100">
+        <div id='bg1' className="row w-100" style={{marginLeft:0}}>
             <div className="col">
                 <h2 style={{ fontSize: 40, paddingTop: 90, paddingLeft: 90 }}> Your pretrial.</h2>
                 <h2 style={{ fontSize: 40, paddingLeft: 90, lineHeight: 0.4 }}>Powered by our AI.
@@ -115,7 +119,7 @@ export function Black() {
                 <p id="p">The acecraft Measurement Process is one <br></br> among the world's most accurate methods.<br></br> We set up a pre-trial event in your campus <br></br> and make each one try on the right fit. No<br></br> more guessing the right size business.</p>
             </div>
             <div className="col">
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-interval="1000">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src={caro1} class="d-block w-100" alt="..." height={400} width={500}></img>
@@ -138,9 +142,31 @@ export function Black() {
                     </button>
                 </div>
             </div>
+            <Container3 />
+        </div>
+    )
+}
+
+export function Container3(){
+    return(
+        <div id='con3' className="container w-100">
+           <img style={{position:'relative'}} src={con3}  width={1282} alt=''></img>
+           <Getintounch />
         </div>
     )
 }
 export default College;
 
+export function Getintounch(){
+    return(
+        <div className="container">
+    <div id='con5' class="content text-center">
+    <p  id='tit'class="ms-m-0">Designer Uniforms</p>
+    <p id='by' class="signature">by</p>
+    <p  id='ace'class="proximaThin logoName">acecraft</p>
+    <a id='a' class="btn btn-default" data-toggle="modal" href="#getInTouch">Get In Touch</a>
+    </div>
+    </div>
+    )
+}
 

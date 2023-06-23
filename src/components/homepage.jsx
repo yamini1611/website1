@@ -2,6 +2,7 @@ import home1 from './images/home-1.jpg';
 import React from "react";
 import home3 from './images/home3.jpg';
 import home4 from './images/home4.jpg';
+import  './homepage.css';
 function home() {
     return (
         <div classNameName="container-breakpoint xs">
@@ -13,7 +14,7 @@ function home() {
             <div ><div id='bg' className="card-group">
                 <div id='pad' className="card">
                     <div class="bg-image hover-zoom">
-                        <img src={home3} alt='' class="w-100" />
+                        <img src={home3} alt='' height={686}  class="w-100" />
                     </div>
 
                     <div className="card-body">
@@ -24,7 +25,7 @@ function home() {
                 </div>
                 <div id='pad' className="card">
                     <div class="bg-image hover-zoom">
-                        <img src={home4} alt='' height={686} class="w-100" />
+                        <img src={home4} alt='' height={686}  class="w-100" />
                     </div>
                     <div >
                         <h1 id='img-content-11'>workwear</h1>

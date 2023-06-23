@@ -9,8 +9,8 @@
   }
 
   @font-face {
-    font-family:thin1 ;
-    src: url(./fonts/Fontspring-DEMO-proximanova-thin.otf);
+    font-family:mediums ;
+    src: url(./fonts/Fontspring-DEMO-proximanova-medium.otf);
   }
 #h3{
     position: absolute;
@@ -129,18 +129,71 @@
 
 }
 
-#bg{
+#bg1{
     background-color: black;
     padding-top: 60px;
     --mdb-gutter-x: 0rem;
-    padding-right: 100px;
-    padding-bottom: 50px;
+    padding-right: 120px; 
+    margin-right: 100px;
 }
+
 
 #p{
     margin-left: 90px;
     color: grey;
     font-size: 18px;
     margin-top: 20px;
+   
+}
 
+/* con3 */
+#con3{
+    padding-top: 70px;
+    padding-left: 0px;
+    padding-right: -2px;
+}
+
+@font-face {
+    font-family: get ;
+    src: url(./fonts/Blenheim\ Signature\ v2.ttf);
+}
+
+
+
+#con5{
+    position: absolute;
+    margin-top: -300px;
+    margin-left: 600px;
+}
+
+#tit{
+    font-family:mediums ;
+    font-size: 25px;
+    color: rgb(141, 139, 139);
+    margin-left: -40px;
+    margin-top: -20px;
+}
+
+#by{
+    font-family: get;
+    color: rgb(172, 170, 170);
+
+}
+
+#ace{
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 5px;
+    font-size: 22px;
+    letter-spacing: 5px;
+    color: rgb(141, 139, 139);
+
+}  
+
+#a{
+    color: antiquewhite;
+    border:solid;
+    border-width: 0.1ch;
+    border-radius: 0%;
+    text-transform: capitalize;
+    font-size: 15px;
 }

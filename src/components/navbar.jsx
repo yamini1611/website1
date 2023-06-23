@@ -1,8 +1,7 @@
 import React from "react";
 import setting from './images/setting.png';
 import { Link } from 'react-router-dom';
-
-
+import './navbar.css'
 
 const Home = () => {
     return (

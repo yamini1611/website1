@@ -2,6 +2,7 @@ import React from "react";
 import fb from './images/FB.png';
 import insta from './images/Insta.jpg';
 import linkdin from './images/Lnkdin.jpg';
+import './footer.css'
 function footer() {
     return (
         <div id='bc' class='container-breakpoint xs ys'>
