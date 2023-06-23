@@ -119,28 +119,19 @@ export function Black() {
                 <p id="p">The acecraft Measurement Process is one <br></br> among the world's most accurate methods.<br></br> We set up a pre-trial event in your campus <br></br> and make each one try on the right fit. No<br></br> more guessing the right size business.</p>
             </div>
             <div className="col">
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-interval="1000">
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src={caro1} class="d-block w-100" alt="..." height={400} width={500}></img>
-                        </div>
-
-                        <div class="carousel-item">
-                            <img src={caro2} class="d-block w-100" alt="..." height={400} width={500}></img>
-                        </div>
-                        <div class="carousel-item">
-                            <img src={caro3} class="d-block w-100" alt="..." height={400} width={500}></img>
-                        </div>
+                      <div class="carousel-item active" data-bs-interval="2000">
+                        <img src={caro1} class="d-block w-100" alt="first"></img>
+                      </div>
+                      <div class="carousel-item" data-bs-interval="2000">
+                        <img src={caro2} class="d-block w-100" alt="second"></img>
+                      </div>
+                      <div class="carousel-item">
+                        <img src={caro3} class="d-block w-100" alt="third"></img>
+                      </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+                  </div>
             </div>
             <Container3 />
         </div>
