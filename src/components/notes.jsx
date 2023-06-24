@@ -19,21 +19,13 @@ const Notes = () => {
 
   return (
 
-
-
-
-
     <div className='container mb-3' style={{padding: 0}}>
-    
-
       <h1 style={{color:'black', marginTop:140}} className='blogs text-center '>Blogs</h1>
 
       <div className='row' >
         {notesindex.map((notes) => (
 
-          <div className="col-md-6" key={notes.id}>
-
-
+          <div className="col-md-12 col-lg-6" key={notes.id}>
 
             <div className="cards">
 

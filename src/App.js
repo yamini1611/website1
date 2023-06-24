@@ -3,7 +3,7 @@ import './App.css';
 import Navbar from './components/navbar';
 import Homepage from './components/homepage';
 import Footer from './components/footer';
-import School from './components/school';
+import School, { ProductDetails, ProductList } from './components/school';
 import College from './components/college';
 import Enterprise from './components/enterprise';
 import Notes from './components/notes';
@@ -20,6 +20,8 @@ function App() {
         <Route exact path="/Enterprise" element={<Enterprise />} />
         <Route exact path="/Notes" element={<Notes />} />
         <Route exact path="/Arien-mask" element={<Arienmask />} />
+        <Route exact path="/ProductList" element={<ProductList />} />
+        <Route exact path="/ProductDetails/:id" element={<ProductDetails />} />
       </Routes>
       <Footer />
     </div>
