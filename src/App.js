@@ -5,7 +5,7 @@ import Homepage from './components/homepage';
 import Footer from './components/footer';
 import School, { ProductDetails, ProductList } from './components/school';
 import College from './components/college';
-import Enterprise from './components/enterprise';
+import Enterprise, { HondaDisplay, HondaProducts } from './components/enterprise';
 import Notes from './components/notes';
 import Arienmask from './components/arien mask';
 
@@ -22,6 +22,9 @@ function App() {
         <Route exact path="/Arien-mask" element={<Arienmask />} />
         <Route exact path="/ProductList" element={<ProductList />} />
         <Route exact path="/ProductDetails/:id" element={<ProductDetails />} />
+        <Route exact path="/HondaProducts" element={<HondaProducts />} />
+        <Route exact path="/HondaDisplay/:id" element={<HondaDisplay />} />
+
       </Routes>
       <Footer />
     </div>

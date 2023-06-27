@@ -52,9 +52,30 @@
 #pimg{
     position: relative;
     margin-top: 240px;
-    
+    height:400px; 
+    width:380px
 }
-
+.image-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .image-container:hover .text-overlay {
+    display: block;
+  }
+  
+  .text-overlay {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+  }
+  
 #t1{
     margin-top: 230px;
     position: absolute;
@@ -96,7 +117,6 @@
 
 #span1{
     padding: 20px;
-    
     background-color: black;
     color: #fcfafa;
 }
@@ -231,4 +251,9 @@
 
 a:hover{
     text-decoration: none;
+}
+
+#sort{
+   margin-left: 900px;
+   margin-top:100px;
 }

@@ -3,12 +3,8 @@ import './school.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Carousel } from 'primereact/carousel';
-import { Tag } from 'primereact/tag';
-import { Button } from 'primereact/button';
-
-// import size from './images/size.webp'
+import { Link  } from 'react-router-dom';
+import size from './images/sizeguide.png'
 function School() {
   return (
     <div>
@@ -161,6 +157,7 @@ export function Con6() {
           Looking to change your supplier?
           <br />
           <button
+            style={{ border: "solid", borderColor: "white", borderWidth: 0.01, borderRadius: 0, color: "white" }}
             type="button"
             id="btn1"
             className="btn btn-transparent"
@@ -182,8 +179,8 @@ export function Con6() {
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel" style={{fontSize:27, color:"black"}}>
-                Get your Uniforms designed and styled by Us!
+                <h5 className="modal-title" id="exampleModalLabel" style={{ fontSize: 27, color: "black" }}>
+                  Get your Uniforms designed and styled by Us!
                 </h5>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
@@ -220,7 +217,7 @@ export function Con6() {
                       <i className="fa-solid fa-envelope fa-2xl icon" style={{ color: '#d2d0d0' }}></i>
                     </div>
                     <div className="col-11">
-                      <input style={{marginRight:220 }}
+                      <input style={{ marginRight: 220 }}
                         type="email"
                         id="email"
                         placeholder="Professional Email"
@@ -233,7 +230,7 @@ export function Con6() {
                       <i className="fa-solid fa-building fa-2xl icon" style={{ color: '#d2d0d0' }}></i>
                     </div>
                     <div className="col-11">
-                      <input style={{marginRight:220 }}
+                      <input style={{ marginRight: 220 }}
                         type="text"
                         id="org"
                         placeholder="Organisation"
@@ -246,7 +243,7 @@ export function Con6() {
                       <i className="fa-solid fa-mobile fa-2xl icon" style={{ color: '#d2d0d0' }}></i>
                     </div>
                     <div className="col-11">
-                      <input style={{marginRight:220 }}
+                      <input style={{ marginRight: 220 }}
                         type="text"
                         id="phone"
                         placeholder="Phone No."
@@ -256,31 +253,31 @@ export function Con6() {
                   <br />
                   <div className="row align-items-center">
                     <div className="col-1">
-                      <i className="fa-solid fa-cubes fa-2xl icon" style={{ color: '#d2d0d0' ,marginTop:-11}}></i>
+                      <i className="fa-solid fa-cubes fa-2xl icon" style={{ color: '#d2d0d0', marginTop: -11 }}></i>
                     </div>
                     <div className="col-11">
-                      <p id="quan" style={{paddingRight:250,paddingTop:30,marginTop:-31}}>Quantity required</p>
-                      <input 
+                      <p id="quan" style={{ paddingRight: 250, paddingTop: 30, marginTop: -31 }}>Quantity required</p>
+                      <input
                         type="radio"
                         id="quantity1"
                         name="age"
                         value="50"
                       />
-                      <label style={{marginRight:95}}>10 - 50 sets</label>
-                      <input 
+                      <label style={{ marginRight: 95 }}>10 - 50 sets</label>
+                      <input
                         type="radio"
                         id="quantity2"
                         name="age"
                         value="100"
                       />
-                      <label  style={{marginRight:115}}>51 - 100 sets</label>
+                      <label style={{ marginRight: 115 }}>51 - 100 sets</label>
                       <input
                         type="radio"
                         id="quantity3"
                         name="age"
                         value="100+"
                       />
-                      <label style={{marginRight:75}}>100+ sets</label>
+                      <label style={{ marginRight: 75 }}>100+ sets</label>
                     </div>
                   </div>
                 </div>
@@ -298,6 +295,9 @@ export const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [products, setProduct] = useState(null);
+  const [selectedSize, setSelectedSize] = useState('');
+  const [quantity, setQuantity] = useState(1);
+
 
   useEffect(() => {
     fetch(`http://localhost:4000/products/${id}`)
@@ -313,33 +313,110 @@ export const ProductDetails = () => {
     navigate('/ProductList');
   };
 
+  const handleSizeChange = (event) => {
+    const selectedSize = event.target.value;
+    setSelectedSize(selectedSize);
+  };
+
+  const getUpdatedRetailPrice = () => {
+    if (!selectedSize) {
+      return products.Retailprice;
+    }
+
+    const basePrice = products.Retailprice;
+
+
+    if (selectedSize === "22") {
+      return basePrice * 2
+    } else if (selectedSize === "24") {
+      return basePrice * 3;
+    }
+    else if (selectedSize === "26") {
+      return basePrice * 4;
+    }
+    else if (selectedSize === "28") {
+      return basePrice * 5;
+    }
+    else if (selectedSize === "30") {
+      return basePrice * 6;
+    }
+
+    return basePrice;
+  };
+  const getTotalPrice = () => {
+    const retailPrice = getUpdatedRetailPrice();
+    return retailPrice * quantity;
+  };
+
+  const handleQuantityChange = (event) => {
+    const quantity = parseInt(event.target.value);
+    setQuantity(quantity);
+  };
 
   return (
-    <div id='divcon' className="clearfix">
-      <img src={products.image} alt={products.pname} id="pimg" onClick={handleGoBack} height={550} width={450} class="col-md-5 float-md-start mb-3 ms-md-3 ml-5 "></img>
+    <div id='divcon' className="clearfix" style={{ marginBottom: 220 }}>
+      <img src={products.image} alt={products.pname} id="pimg" onClick={handleGoBack} class="col-md-5 float-md-start mb-3 ms-md-3 ml-5 "></img>
       <h5 id='t1' > {products.pname}</h5>
       <h6 id='t2'><strong>Product Code: </strong>{products.productcode}</h6>
       <h6 id='t2' style={{ marginTop: 360 }}><strong>Brand:</strong>{products.Brand}</h6>
       <h6 id='t2' style={{ marginTop: 390, }}><strong>Sold By:</strong>{products.SoldBy}</h6>
-      <h6 id='t2' style={{ marginTop: 410, fontSize: 35, fontFamily: "sans-serif" }}>₹{products.Retailprice}</h6>
-      <h6 id='t2' style={{ marginTop: 420, marginLeft: 695, fontFamily: "sans-serif", fontSize: 20, textDecoration: "line-through", fontWeight: 400 }}>₹{products.mrp}</h6>
+      <h6 id='t2' style={{ marginTop: 410, fontSize: 35, fontFamily: "sans-serif" }}>₹{getUpdatedRetailPrice()}</h6>
+
+
+      <h6 id='t2' style={{ marginTop: 420, marginLeft: 705, fontFamily: "sans-serif", fontSize: 20, textDecoration: "line-through", fontWeight: 400 }}>₹{products.mrp}</h6>
       <h4 id='t3'>45% OFF</h4>
-      <button type="button" class="btn btn-primary" id='t3' style={{ marginLeft: 50, marginTop: 540 }} data-bs-toggle="modal" >
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xxl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel" style={{ fontFamily: "courier new", paddingLeft: 150, fontWeight: "400", fontSize: 45 }}>acecraft</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div className="row">
+                <div className="col-6">
+                  <img src={size} alt="" height={300} width={300}></img>
+                </div>
+                <div className="col-6 ">
+                  <img style={{ marginLeft: 50 }} src={products.image} alt="" height={170} width={170}></img>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn" id='t3' style={{ marginLeft: 200, marginTop: 540 }} data-bs-toggle="modal" data-bs-target="#exampleModal">
         SIZE GUIDE
       </button>
-
-
       <div id='t5' className="form-group">
         <label className="option-name">
           <span id='span1' className="ng-binding">Size:</span>
         </label>
         <div className="option-values">
-          <select ng-model="product.selected_options[value.name]" className="form-control  ng-pristine ng-valid ng-touched" ng-change="findRules(value.name,product.selected_options[value.name])" ng-options="option.value as option.label disable when !option.available for option in  option_values[value.name]" ><option value="" disabled="" class="ng-binding" selected="selected">Please Select</option><option label="22" value="string:22" selected="selected">22</option><option label="24" value="string:24">24</option><option disabled="" label="26" value="string:26">26</option><option disabled="" label="28" value="string:28">28</option><option disabled="" label="30" value="string:30">30</option><option disabled="" label="32" value="string:32">32</option><option disabled="" label="34" value="string:34">34</option><option disabled="" label="36" value="string:36">36</option><option disabled="" label="38" value="string:38">38</option><option label="40" value="string:40">40</option><option label="42" value="string:42">42</option><option label="44" value="string:44">44</option></select>
+          <select value={selectedSize} onChange={handleSizeChange} className="form-control ng-pristine ng-valid ng-touched">
+            <option value="" disabled>Please Select</option>
+            <option value="22">22</option>
+            <option value="24">24</option>
+            <option value="26">26</option>
+            <option value="28">28</option>
+            <option value="30">30</option>
+
+          </select>
         </div>
         <div style={{ marginTop: 70 }}>
-          <label id='quantity' for="number-input">Quantity:</label>
-          <input style={{ paddingBottom: 0, textAlign: "center" }} placeholder="1" type="number" id="number-input" min="1" step="1" required></input>
-        </div>
+          <label id='quantity' for="number-input" >Quantity:</label>
+
+          <input style={{ paddingBottom: 0, textAlign: "center" }} onChange={handleQuantityChange} placeholder="" type="number" id="number-input" min="1" step="1" required></input>
+
+        </div><br></br>
+        <h6 style={{ fontSize: 20, padding: 10, textAlign: "center", fontFamily: "sans-serif", backgroundColor: "black", color: "white" }}>₹Total Price:{getTotalPrice()}</h6>
+
         <div style={{ marginTop: 40 }}>
           <button type="button" style={{ marginRight: 5, backgroundColor: 'black', color: 'white', padding: 10 }} >ADD TO CART</button>
           <button type="button" style={{ backgroundColor: 'black', color: 'white', padding: 10 }}>BUY NOW</button>
@@ -349,9 +426,9 @@ export const ProductDetails = () => {
             <h6 id='ca5' style={{ fontWeight: 200, fontSize: 13 }}>Made from Poly-cotton. Henley neckline. Short sleeves.</h6>
             <h6 id='co4' style={{ fontWeight: 400, fontSize: 16 }}>Related products</h6>
             <div id="gallery" class="carousel slide" data-ride="carousel">
-              <div class="carousel-inner">
+              <div class="carousel-inner" >
 
-                <div class="carousel-item active">
+                <div class="carousel-item active" >
                   <a class="carousel-control-prev-icon" href="#gallery" role="button" data-slide="prev">
                     <span class="carousel-control-prev"></span>
                     <span class="sr-only">Previous</span>
@@ -361,7 +438,7 @@ export const ProductDetails = () => {
                     <span class="carousel-control-next" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                   </a>
-                  <div id='row1' class="row">
+                  <div id='row1' class="row"   >
 
                     <div class="col">
 
@@ -426,22 +503,54 @@ export const ProductDetails = () => {
   )
 };
 
+
+
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [sortOption, setSortOption] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:4000/products')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setProducts(data);
+    axios
+      .get('http://localhost:4000/products')
+      .then((response) => {
+        console.log(response.data);
+        setProducts(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-  console.log(products);
+  useEffect(() => {
+    sortProducts();
+  }, [sortOption]);
+
+  const sortProducts = () => {
+    let sortedProducts = [...products];
+
+    switch (sortOption) {
+      case 'lowToHigh':
+        sortedProducts.sort((a, b) => a.Retailprice - b.Retailprice);
+        break;
+      case 'highToLow':
+        sortedProducts.sort((a, b) => b.Retailprice - a.Retailprice);
+        break;
+      case 'nameAscending':
+        sortedProducts.sort((a, b) => a.pname.localeCompare(b.pname));
+        break;
+      case 'nameDescending':
+        sortedProducts.sort((a, b) => b.pname.localeCompare(a.pname));
+        break;
+      default:
+        break;
+    }
+
+    setProducts(sortedProducts);
+  };
+
+  const handleSortChange = (e) => {
+    setSortOption(e.target.value);
+  };
 
   if (!products || products.length === 0) {
     return <div>Loading...</div>;
@@ -449,7 +558,7 @@ export const ProductList = () => {
 
   return (
     <div>
-      <img src="http://cdn.storehippo.com/s/5997cc7c4d6e8ffa20e50aae/ms.files/MJK07401.jpg" alt="" height={820} width={1342}></img>
+      <img src="http://cdn.storehippo.com/s/5997cc7c4d6e8ffa20e50aae/ms.files/MJK07401.jpg" alt="" height={820} width={1342} />
       <div
         style={{
           position: 'absolute',
@@ -458,27 +567,63 @@ export const ProductList = () => {
           transform: 'translate(-50%, -50%)',
           textAlign: 'center',
           color: 'grey',
-
         }}
       >
-        <h2 id='imgt'>Decode</h2>
-        <h2 id='imgt1'>Your kind of designer uniforms.</h2>
+        <h2 id="imgt">Decode</h2>
+        <h2 id="imgt1">Your kind of designer uniforms.</h2>
       </div>
-
-      <div style={{ paddingLeft: 130, marginTop: 200 }} >
-
-        <h5 id='ti'>NEW HORIZON GURUKUL</h5>
+      <select id="sort" value={sortOption} onChange={handleSortChange}>
+        <option value="" disabled>
+          Sort By
+        </option>
+        <option value="lowToHigh">Price: Low to High</option>
+        <option value="highToLow">Price: High to Low</option>
+        <option value="nameAscending">Name: Ascending Order</option>
+        <option value="nameDescending">Name: Descending Order</option>
+      </select>
+      <div style={{ paddingLeft: 130, marginTop: 200 }}>
+        <h5 id="ti" style={{ marginTop: -200, paddingBottom: 30 }}>
+          SCHOOL <span style={{ fontFamily: 'initial', fontWeight: 100, color: 'gray' }}>-44 items</span>
+        </h5>
+        <h5 id="ti">NEW HORIZON GURUKUL</h5>
 
         {products.map((product) => (
-          <Link key={product.id} to={`/ProductDetails/${product.id}`} style={{ textDecoration: 'none' }}>
-
-            <div style={{ marginLeft: 10, display: 'inline-block', flexDirection: 'col' }}>
-              <img className="img-fluid" src={product.image} height={100} width={350} alt={product.pname} />
-              <h4 id='pname'>{product.pname}</h4>
+          <div key={product.id} style={{ marginLeft: 10, marginBottom: 30, display: 'inline-block', flexDirection: 'col' }}>
+            <div className="image-container">
+              <Link to={`/ProductDetails/${product.id}`} style={{ textDecoration: 'none' }}>
+                <img className="img-fluid" src={product.image} height={100} width={350} alt={product.pname} />
+              </Link>
+              <div className="text-overlay">
+                <button type="button" className="btn btn" style={{ marginLeft: 10, marginTop: 50, backgroundColor: "black", color: "white" }} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Quick View
+                </button>
+              </div>
             </div>
-
-          </Link>
-
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-dialog modal-xxl">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel" style={{ fontFamily: "courier new", paddingLeft: 150, fontWeight: "400", fontSize: 45 }}>acecraft</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div className="modal-body">
+                    <div className="row">
+                      <div className="col-6">
+                        <img src={product.image} alt="" height={300} width={300} />
+                      </div>
+                      <div className="col-6">
+                        <img style={{ marginLeft: 50 }} src={product.image} alt="" height={170} width={170} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h4 id="pname">{product.pname}</h4>
+          </div>
         ))}
       </div>
     </div>
@@ -486,89 +631,5 @@ export const ProductList = () => {
 };
 
 
-
-export function Sort() {
-  return (
-    <div>
-      <table>
-        <th>PRICE</th>
-        <th>GENDER</th>
-        <th>GRADE</th>
-        <th>BRAND</th>
-      </table>
-    </div>
-  )
-}
-
-export function NumScrollDemo() {
-  const { id } = useParams();
-  const [products, setProduct] = useState([]);
-  const responsiveOptions = [
-    {
-      breakpoint: '1199px',
-      numVisible: 1,
-      numScroll: 1
-    },
-    {
-      breakpoint: '991px',
-      numVisible: 2,
-      numScroll: 1
-    },
-    {
-      breakpoint: '767px',
-      numVisible: 1,
-      numScroll: 1
-    }
-  ];
-
-  const getSeverity = (product) => {
-    switch (product.inventoryStatus) {
-      case 'INSTOCK':
-        return 'success';
-
-      case 'LOWSTOCK':
-        return 'warning';
-
-      case 'OUTOFSTOCK':
-        return 'danger';
-
-      default:
-        return null;
-    }
-  };
-
-
-
-  useEffect(() => {
-    fetch('http://localhost:4000/products')
-      .then((response) => response.json())
-      .then((data) => setProduct(data));
-  }, [id]);
-
-  const productTemplate = (product) => {
-    return (
-      <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
-        <div className="mb-3">
-          <img src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} className="w-6 shadow-2" />
-        </div>
-        <div>
-          <h4 className="mb-1">{product.name}</h4>
-          <h6 className="mt-0 mb-3">${product.price}</h6>
-          <Tag value={product.inventoryStatus} severity={getSeverity(products)}></Tag>
-          <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-            <Button icon="pi pi-search" className="p-button p-button-rounded" />
-            <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <div className="card">
-      <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
-    </div>
-  )
-}
 
 
