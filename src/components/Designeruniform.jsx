@@ -133,6 +133,8 @@ export default function Designeruniform() {
                       />
                       <label style={{marginRight:75}}>100+ sets</label>
                     </div>
+                    <button  style={{backgroundColor:"black" , color:"white"}} type="button" >Submit</button>
+
                   </div>
                 </div>
               </div>

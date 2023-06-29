@@ -1,0 +1,74 @@
+
+
+#pcart{
+    padding: 200px 100px 10px 15px;
+    font-size: 30px;
+}
+
+#bucart{
+    padding: 12px 50px  12px 45px;
+    margin:0px 50px 330px 30px
+}
+
+#cartdiv{
+    margin:150px  0px 0px 0px ;
+    text-align: center;
+  
+}
+
+#h7{
+    font-size: 38px;
+    font-family:reg;
+    font-weight: 200;
+}
+
+@font-face {
+    font-family:mediums ;
+    src: url(./fonts/Fontspring-DEMO-proximanova-medium.otf);
+  }
+
+  #imgcart{
+    height: 370px;
+    width: 380px;
+  }
+
+  #ul {
+    list-style-type: none;
+    overflow-x: hidden;
+    padding: 0px 100px 0px 100px;
+  }
+
+  #names{
+    font-family:reg;
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family:reg ;
+    src: url(./fonts/ProximaNova-Regular.otf);
+  }
+  #p1{
+    font-family:reg;
+    font-weight: 600;
+    font-size: 24px;
+  }
+
+  input{
+    color: rgb(221, 224, 224);
+  }
+
+  #fi{
+  font-family:reg;
+  font-weight: 600;
+
+  font-size: 20px;
+}
+#spaning{
+    cursor: pointer;
+}
+#hu{
+    font-family:reg;
+    font-weight: 200;
+    text-align: right;
+}

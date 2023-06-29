@@ -1,9 +1,10 @@
 import React from "react";
 import './school.css';
 import axios from 'axios';
+
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Link  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import size from './images/sizeguide.png'
 function School() {
   return (
@@ -297,8 +298,7 @@ export const ProductDetails = () => {
   const [products, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
-
-
+   
   useEffect(() => {
     fetch(`http://localhost:4000/products/${id}`)
       .then((response) => response.json())
@@ -325,24 +325,21 @@ export const ProductDetails = () => {
 
     const basePrice = products.Retailprice;
 
-
     if (selectedSize === "22") {
-      return basePrice * 2
+      return basePrice * 2;
     } else if (selectedSize === "24") {
       return basePrice * 3;
-    }
-    else if (selectedSize === "26") {
+    } else if (selectedSize === "26") {
       return basePrice * 4;
-    }
-    else if (selectedSize === "28") {
+    } else if (selectedSize === "28") {
       return basePrice * 5;
-    }
-    else if (selectedSize === "30") {
+    } else if (selectedSize === "30") {
       return basePrice * 6;
     }
 
     return basePrice;
   };
+
   const getTotalPrice = () => {
     const retailPrice = getUpdatedRetailPrice();
     return retailPrice * quantity;
@@ -353,6 +350,43 @@ export const ProductDetails = () => {
     setQuantity(quantity);
   };
 
+  const handleAddToCart = () => {
+    console.log('Selected size:', selectedSize);
+    const size = selectedSize;
+ 
+    const productToAdd = {
+      id: products.id,
+      image: products.image,
+      name: products.pname,
+      price: getTotalPrice(),
+      size:size,
+      quantity: quantity,
+    };
+
+    fetch("http://localhost:4000/Cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productToAdd),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Error adding product to cart");
+        }
+      })
+      .then((data) => {
+        alert("Product added to cart:", data);
+        navigate("/AddTocart");
+      })
+      .catch((error) => {
+        // Skip displaying the error alert
+        navigate("/AddTocart");
+      });
+    
+    }    
   return (
     <div id='divcon' className="clearfix" style={{ marginBottom: 220 }}>
       <img src={products.image} alt={products.pname} id="pimg" onClick={handleGoBack} class="col-md-5 float-md-start mb-3 ms-md-3 ml-5 "></img>
@@ -400,7 +434,7 @@ export const ProductDetails = () => {
         </label>
         <div className="option-values">
           <select value={selectedSize} onChange={handleSizeChange} className="form-control ng-pristine ng-valid ng-touched">
-            <option value="" disabled>Please Select</option>
+            <option value="20" disabled>Please Select</option>
             <option value="22">22</option>
             <option value="24">24</option>
             <option value="26">26</option>
@@ -412,13 +446,13 @@ export const ProductDetails = () => {
         <div style={{ marginTop: 70 }}>
           <label id='quantity' for="number-input" >Quantity:</label>
 
-          <input style={{ paddingBottom: 0, textAlign: "center" }} onChange={handleQuantityChange} placeholder="" type="number" id="number-input" min="1" step="1" required></input>
+          <input  style={{ paddingBottom: 0, textAlign: "center" , color:"black" }} onChange={handleQuantityChange} placeholder="" type="number" id="number-input" min="1" step="1" required></input>
 
         </div><br></br>
         <h6 style={{ fontSize: 20, padding: 10, textAlign: "center", fontFamily: "sans-serif", backgroundColor: "black", color: "white" }}>₹Total Price:{getTotalPrice()}</h6>
 
         <div style={{ marginTop: 40 }}>
-          <button type="button" style={{ marginRight: 5, backgroundColor: 'black', color: 'white', padding: 10 }} >ADD TO CART</button>
+          <button type="button" onClick={handleAddToCart}  style={{ marginRight: 5, backgroundColor: 'black', color: 'white', padding: 10 }} >ADD TO CART</button>
           <button type="button" style={{ backgroundColor: 'black', color: 'white', padding: 10 }}>BUY NOW</button>
           <div id='carosuel'>
             <h6 id='co4'>Description of product</h6>
@@ -600,7 +634,7 @@ export const ProductList = () => {
               </div>
             </div>
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div className="modal-dialog modal-xxl">
+              <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel" style={{ fontFamily: "courier new", paddingLeft: 150, fontWeight: "400", fontSize: 45 }}>acecraft</h5>
@@ -612,7 +646,7 @@ export const ProductList = () => {
                         <img src={product.image} alt="" height={300} width={300} />
                       </div>
                       <div className="col-6">
-                        <img style={{ marginLeft: 50 }} src={product.image} alt="" height={170} width={170} />
+                        <h1>{product.pname}</h1>
                       </div>
                     </div>
                   </div>

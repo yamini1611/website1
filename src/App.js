@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router';
 import './App.css';
-import Navbar from './components/navbar';
+import Navbar ,{Signin , Signup} from './components/navbar';
 import Homepage from './components/homepage';
 import Footer from './components/footer';
 import School, { ProductDetails, ProductList } from './components/school';
@@ -8,7 +8,7 @@ import College from './components/college';
 import Enterprise, { HondaDisplay, HondaProducts } from './components/enterprise';
 import Notes from './components/notes';
 import Arienmask from './components/arien mask';
-
+import AddTocart from './components/Addtocart'
 function App() {
   return (
     <div >
@@ -24,6 +24,9 @@ function App() {
         <Route exact path="/ProductDetails/:id" element={<ProductDetails />} />
         <Route exact path="/HondaProducts" element={<HondaProducts />} />
         <Route exact path="/HondaDisplay/:id" element={<HondaDisplay />} />
+        <Route exact path="/Addtocart" element={<AddTocart />} />
+        <Route exact path="/Signin" element={<Signin />} />
+        <Route exact path="/SignUp" element={<Signup />} />
 
       </Routes>
       <Footer />

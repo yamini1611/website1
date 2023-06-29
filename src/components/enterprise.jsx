@@ -142,7 +142,7 @@ function Steps() {
 function Fourimgblock() {
     const [fourimgindex, setfourimgindex] = useState([]);
     const fetchData = () => {
-        fetch('http://localhost:4000/fourimgblock')
+        fetch('http://localhost:4000/four')
             .then((response) => response.json())
             .then((data) => {
                 setfourimgindex(data);
@@ -288,7 +288,6 @@ export const HondaDisplay = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [products, setProduct] = useState(null);
-    const [quantity, setQuantity] = useState(1);
 
 
     useEffect(() => {
@@ -304,17 +303,8 @@ export const HondaDisplay = () => {
     const handleGoBack = () => {
         navigate('/HondaProducts');
     };
+    
 
-
-        const getTotalPrice = () => {
-            const retailPrice = products.Retailprice
-            return retailPrice * quantity;
-        };
-        const handleQuantityChange = (event) => {
-            const quantity = parseInt(event.target.value);
-            setQuantity(quantity);
-        };
-   
         return (
             <div id='divcon' className="clearfix" style={{ marginBottom: 100 }}>
                 <img src={products.image} alt={products.pname} id="pimg1" onClick={handleGoBack} height={500} width={450} class="col-md-5 float-md-start mb-3 ms-md-3 ml-5 "></img>
@@ -337,9 +327,8 @@ export const HondaDisplay = () => {
                     </div>
                     <div style={{ marginTop: 70 }}>
                         <label id='quantity' for="number-input">Quantity:</label>
-                        <input style={{ paddingBottom: 0, textAlign: "center" }} onChange={handleQuantityChange} placeholder="1" type="number" id="number-input" min="1" step="1" required></input>
+                        <input style={{ paddingBottom: 0, textAlign: "center" }}placeholder="1" type="number" id="number-input" min="1" step="1" required></input>
                     </div><br></br>
-                    <h6 style={{ fontSize: 20, padding: 10, textAlign: "center", fontFamily: "sans-serif", backgroundColor: "black", color: "white" }}>₹Total Price:{getTotalPrice()}</h6>
 
                     <div style={{ marginTop: 40 }}>
                         <button type="button" style={{ marginRight: 5, backgroundColor: 'black', color: 'white', padding: 10 }} >ADD TO CART</button>
