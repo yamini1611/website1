@@ -577,9 +577,39 @@
       "id": 2,
       "image": "https://cdn.storehippo.com/s/5997cc7c4d6e8ffa20e50aae/601d6e74cbfb666ae1145869/webp/elementary-school-480x480.jpg",
       "name": "CIS Royal Day Wear (Grade 1-5)",
-      "price": 1360,
-      "size": "22",
-      "quantity": 1
+      "price": 680,
+      "size": "",
+      "quantity": 2
+    }
+  ],
+  "Register": [
+    {
+      "firstName": "vignesh",
+      "lastName": "R",
+      "email": "vignesh@gmail.com",
+      "password": "Yamini@1611",
+      "confirmPassword": "Yamini@1611",
+      "schoolOrEnterprise": "School",
+      "dealershipName": "shasha",
+      "dealershipCode": "123",
+      "city": "cbe",
+      "state": "Tamil Nadu",
+      "gstNumber": "152147",
+      "id": 1
+    },
+    {
+      "firstName": "yamini",
+      "lastName": "priya",
+      "email": "yamini@gmail.com",
+      "password": "yamini@1611",
+      "confirmPassword": "yamini@1611",
+      "schoolOrEnterprise": "School",
+      "dealershipName": "shasha",
+      "dealershipCode": "125",
+      "city": "cbe",
+      "state": "Tamil Nadu",
+      "gstNumber": "125896",
+      "id": 2
     }
   ]
 }

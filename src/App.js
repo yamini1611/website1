@@ -8,7 +8,8 @@ import College from './components/college';
 import Enterprise, { HondaDisplay, HondaProducts } from './components/enterprise';
 import Notes from './components/notes';
 import Arienmask from './components/arien mask';
-import AddTocart from './components/Addtocart'
+import AddTocart from './components/Addtocart';
+import Notesdetails from "./components/Notesdetails"
 function App() {
   return (
     <div >
@@ -27,7 +28,7 @@ function App() {
         <Route exact path="/Addtocart" element={<AddTocart />} />
         <Route exact path="/Signin" element={<Signin />} />
         <Route exact path="/SignUp" element={<Signup />} />
-
+        <Route exact path="/Notesdetails"element={<Notesdetails />} />
       </Routes>
       <Footer />
     </div>

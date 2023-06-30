@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from "react";
-import "./Addctocart.css";
+import React, { useState, useEffect, useContext } from "react";
+import './Addctocart.css';
 import { Link } from "react-router-dom";
-
+import { CartContext } from "./CartContext";
+import useCart from "react-use-cart"
 const AddToCart = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const { cartItems, setCartItems } = useContext(CartContext);
+  const [cartItemCount, setCartItemCount] = useState(0);
 
   useEffect(() => {
     fetch("http://localhost:4000/Cart")
       .then((response) => response.json())
-      .then((data) => setCartItems(data))
-      .catch((error) => console.error("Error retrieving cart items:", error));
-  }, []);
+      .then((data) => {
+        setCartItems(data);
+        setCartItemCount(data.length);
+      })
+      .catch((error) =>
+        console.error("Error retrieving cart items:", error)
+      );
+  }, [setCartItems]);
 
   const updateCartItem = (itemId, updatedQuantity) => {
     const updatedCartItems = cartItems.map((item) => {
@@ -23,13 +30,15 @@ const AddToCart = () => {
       }
       return item;
     });
-  
+
     fetch(`http://localhost:4000/Cart/${itemId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedCartItems.find((item) => item.id === itemId)),
+      body: JSON.stringify(
+        updatedCartItems.find((item) => item.id === itemId)
+      ),
     })
       .then((response) => response.json())
       .then(() => {
@@ -38,7 +47,43 @@ const AddToCart = () => {
       })
       .catch((error) => console.error("Error updating cart item:", error));
   };
-  
+
+  const decreaseQuantity = (itemId) => {
+    const updatedCartItem = cartItems.find((item) => item.id === itemId);
+    const updatedQuantity = updatedCartItem.quantity - 1;
+
+    if (updatedQuantity >= 0) {
+      const updatedPrice =
+        (updatedCartItem.price / updatedCartItem.quantity) * updatedQuantity;
+      const updatedCartItems = cartItems.map((item) => {
+        if (item.id === itemId) {
+          return {
+            ...item,
+            quantity: updatedQuantity,
+            price: updatedPrice,
+          };
+        }
+        return item;
+      });
+
+      fetch(`http://localhost:4000/Cart/${itemId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+          updatedCartItems.find((item) => item.id === itemId)
+        ),
+      })
+        .then((response) => response.json())
+        .then(() => {
+          setCartItems(updatedCartItems);
+          alert("Quantity updated successfully!");
+        })
+        .catch((error) => console.error("Error updating cart item:", error));
+    }
+  };
+
   const calculateSubTotal = () => {
     let subtotal = 0;
     cartItems.forEach((item) => {
@@ -47,9 +92,6 @@ const AddToCart = () => {
     return subtotal.toFixed(2);
   };
 
- 
-
-  // Calculate total
   const calculateTotal = () => {
     const subtotal = calculateSubTotal();
     const shippingCharges = 50;
@@ -58,30 +100,14 @@ const AddToCart = () => {
     return total.toFixed(2);
   };
 
-  // Increase quantity
   const increaseQuantity = (itemId) => {
     const updatedQuantity = cartItems.find((item) => item.id === itemId)
       .quantity + 1;
     updateCartItem(itemId, updatedQuantity);
   };
 
-  // Decrease quantity
-  const decreaseQuantity = (itemId) => {
-    const updatedQuantity = cartItems.find((item) => item.id === itemId)
-      .quantity - 1;
-    updateCartItem(itemId, updatedQuantity);
-  };
   const removeCartItem = (itemId) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
-  
-    const getCartItemCount = () => {
-      let count = 0;
-      cartItems.forEach((item) => {
-        count += item.quantity;
-      });
-      return count;
-    };
-
 
     fetch(`http://localhost:4000/Cart/${itemId}`, {
       method: "DELETE",
@@ -92,6 +118,7 @@ const AddToCart = () => {
       })
       .catch((error) => console.error("Error removing cart item:", error));
   };
+
   return (
     <div>
       {cartItems.length === 0 ? (
@@ -106,7 +133,9 @@ const AddToCart = () => {
       ) : (
         <ul id="ul">
           <div id="cartdiv">
-            <h1 id="h7">Your bag total is <span >₹{calculateTotal()}</span></h1>
+            <h1 id="h7">
+              Your bag total is <span>₹{calculateTotal()}</span>
+            </h1>
             <hr></hr>
           </div>
           {cartItems.map((item) => (
@@ -128,21 +157,30 @@ const AddToCart = () => {
                 </div>
                 <div className="col-2 d-flex">
                   <div className="d-flex">
-                    <span 
-                      onClick={() => decreaseQuantity(item.id) } 
+                    <span
+                      onClick={() => decreaseQuantity(item.id)}
                       style={{ marginRight: "5px", border: "grey" }}
                     >
                       <i style={{ fontSize: 13 }} className="fa-solid fa-minus"></i>
                     </span>
                     <p style={{ fontSize: 18, marginRight: 10 }}>{item.quantity}</p>
-                    <span style={{ border: "grey" }} onClick={() => increaseQuantity(item.id)}>
+                    <span
+                      style={{ border: "grey" }}
+                      onClick={() => increaseQuantity(item.id)}
+                    >
                       <i style={{ fontSize: 13 }} className="fa-solid fa-plus"></i>
                     </span>
                   </div>
                 </div>
                 <div className="col-2">
                   <p id="p1">₹{item.price}</p>
-                  <span id='spaning' onClick={() => removeCartItem(item.id)} className="text-danger">Remove</span>
+                  <span
+                    id="spaning"
+                    onClick={() => removeCartItem(item.id)}
+                    className="text-danger"
+                  >
+                    Remove
+                  </span>
                 </div>
               </div>
               <hr></hr>

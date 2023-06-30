@@ -1,17 +1,31 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import setting from './images/setting.png';
 import { Link } from 'react-router-dom';
 import './navbar.css';
+import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import getCartItemsCount from './Addtocart'
-
+import axios from "axios";
 const Home = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [cartItemCount, setCartItemCount] = useState(0);
+
     const handleDropdownToggle = () => {
         setIsDropdownOpen(!isDropdownOpen);
-    };
 
+    };
+    useEffect(() => {
+        fetchCartItems();
+    }, []);
+
+    const fetchCartItems = () => {
+        fetch("http://localhost:4000/Cart")
+            .then((response) => response.json())
+            .then((data) => {
+                setCartItemCount(data.length);
+            })
+            .catch((error) => console.error("Error retrieving cart items:", error));
+    };
     return (
         <div>
             <div className="fixed-top">
@@ -78,9 +92,10 @@ const Home = () => {
                                     <li>
                                         <Link to="/Addtocart">
                                             <i id='fa' style={{ paddingLeft: 25, marginTop: -5 }} className="fa-sharp fa-solid fa-cart-shopping">
-                                             
-                                                    <span id='badge' style={{ fontSize: "12px" ,marginLeft:-45 }} className="position-absolute top-0 start-100 translate-middle badge rounded-pill">{getCartItemsCount}</span>
-                                                </i>
+                                                {cartItemCount > 0 && (
+                                                    <span id='badge' style={{ fontSize: "12px", marginLeft: -45 }} className="position-absolute top-0 start-100 translate-middle badge rounded-pill">{cartItemCount}</span>
+                                                )}
+                                            </i>
                                         </Link>
                                     </li>
                                 </ul>
@@ -89,6 +104,7 @@ const Home = () => {
                     </nav>
                 </header>
             </div>
+
         </div>
     );
 }
@@ -96,36 +112,116 @@ const Home = () => {
 export default Home;
 
 
-export function Signin() {
-  
-    return (
-        <div id='signin'>
-            <form >
-                <div class="mb-3">
-                    <h1 style={{ textAlign: "center", color: "grey", fontFamily: "sans-serif", fontSize: 28 }}>Login with ACECRAFT</h1>
-                    <label for="Username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="Username" required ></input>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label" >Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" required ></input>
-                </div>
 
-                <button style={{ backgroundColor: "black", textAlign: "center", paddingLeft: 120, paddingRight: 120 }} type="submit" class="btn btn-dark">Login</button>
-            </form>
-        </div>
-    )
+export function Signin() {
+  const [error, setError] = useState('');
+
+  const handleSubmit = (values) => {
+    const { email, password } = values;
+
+    fetch('http://localhost:4000/Register')
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Error retrieving registered details');
+        }
+      })
+      .then((registeredUsers) => {
+        const user = registeredUsers.find((user) => user.email === email && user.password === password);
+
+        if (user) {
+          console.log('Login successful');
+          setError('');
+        } else {
+          setError('Invalid email or password');
+        }
+      })
+      .catch((error) => {
+        console.error('Error retrieving registered details:', error);
+        setError('Error retrieving registered details');
+      });
+  };
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    password: Yup.string().required('Password is required'),
+  });
+
+  return (
+    <div id='signin'>
+      <h1 style={{ textAlign: 'center', color: 'grey', fontFamily: 'sans-serif', fontSize: 28 }}>
+        Login with ACECRAFT
+      </h1>
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        <Form>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <Field
+              type="text"
+              className="form-control"
+              id="email"
+              name="email"
+              required
+            />
+            <ErrorMessage name="email" component="div" className="error-message" />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <Field
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              required
+            />
+            <ErrorMessage name="password" component="div" className="error-message" />
+          </div>
+          {error && <div className="error-message">{error}</div>}
+          <button
+            style={{ backgroundColor: 'black', textAlign: 'center', paddingLeft: 120, paddingRight: 120 }}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Login
+          </button>
+        </Form>
+      </Formik>
+    </div>
+  );
 }
 
-
-
-
-
 export const Signup = () => {
-    const handleSubmit = (values) => {
+    const navigate = useNavigate();
 
+    const handleSubmit = (values) => {
         console.log(values);
-    };
+      
+        axios
+          .post('http://localhost:4000/Register', values)
+          .then((response) => {
+            if (response.status === 200) {
+              alert('User registered:', response.data);
+              navigate('/Signin');
+            } else {
+              throw new Error('Error registering user');
+            }
+          })
+          .catch((error) => {
+            console.error('Error registering user:', error);
+          });
+      };
 
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('First Name is required'),
@@ -166,55 +262,55 @@ export const Signup = () => {
                 <Form id='signup'>
                     <div>
                         <h1 id='h1signup'>Signup with ACECRAFT</h1>
-                        <Field style={{ paddingRight: 150 }} type="text" placeholder="First Name" id="firstName" name="firstName" />
+                        <Field style={{ paddingRight: 150 , color:"black" }} type="text" placeholder="First Name" id="firstName" name="firstName" />
                         <ErrorMessage name="firstName" component="div" className="error-message" />
                     </div><br></br>
 
                     <div>
-                        <Field style={{ paddingRight: 150 }} type="text" placeholder="Last Name" id="lastName" name="lastName" />
+                        <Field style={{ paddingRight: 150  , color:"black"}} type="text" placeholder="Last Name" id="lastName" name="lastName" />
                         <ErrorMessage name="lastName" component="div" className="error-message" />
                     </div><br></br>
 
                     <div>
-                        <Field style={{ paddingRight: 150 }} type="email" placeholder="Email" id="email" name="email" />
+                        <Field style={{ paddingRight: 150  , color:"black"}} type="email" placeholder="Email" id="email" name="email" />
                         <ErrorMessage name="email" component="div" className="error-message" />
                     </div><br></br>
 
                     <div>
-                        <Field style={{ paddingRight: 150 }} type="password" placeholder="Password" id="password" name="password" />
+                        <Field style={{ paddingRight: 150  , color:"black"}} type="password" placeholder="Password" id="password" name="password" />
                         <ErrorMessage name="password" component="div" className="error-message" />
                     </div><br></br>
 
                     <div>
-                        <Field style={{ paddingRight: 150 }} placeholder="Confirm Password" type="password" id="confirmPassword" name="confirmPassword" />
+                        <Field style={{ paddingRight: 150  , color:"black"}} placeholder="Confirm Password" type="password" id="confirmPassword" name="confirmPassword" />
                         <ErrorMessage name="confirmPassword" component="div" className="error-message" />
                     </div><br></br>
 
                     <div >
                         <div >
                             <label>
-                                <Field style={{ paddingRight: 150 }} type="radio" name="schoolOrEnterprise" value="School" />
+                                <Field style={{ paddingRight: 150  , color:"black"}} type="radio" name="schoolOrEnterprise" value="School" />
                                 School
                             </label>
                             <label>
-                                <Field style={{ paddingRight: 150 }} type="radio" name="schoolOrEnterprise" value="Enterprise" />
+                                <Field style={{ paddingRight: 150  , color:"black"}} type="radio" name="schoolOrEnterprise" value="Enterprise" />
                                 Enterprise
                             </label>
                         </div>
                         <ErrorMessage name="schoolOrEnterprise" component="div" className="error-message" />
                     </div><br></br>
                     <div>
-                        <Field style={{ paddingRight: 150 }} placeholder="Dealership Name" type="text" id="dealershipName" name="dealershipName" />
+                        <Field style={{ paddingRight: 150  , color:"black"}} placeholder="Dealership Name" type="text" id="dealershipName" name="dealershipName" />
                         <ErrorMessage name="dealershipName" component="div" className="error-message" />
                     </div><br></br>
 
                     <div>
-                        <Field style={{ paddingRight: 150 }} type="text" id="dealershipCode" placeholder="Dealership Number/Code" name="dealershipCode" />
+                        <Field style={{ paddingRight: 150  , color:"black"}} type="text" id="dealershipCode" placeholder="Dealership Number/Code" name="dealershipCode" />
                         <ErrorMessage name="dealershipCode" component="div" className="error-message" />
                     </div><br></br>
 
                     <div>
-                        <Field style={{ paddingRight: 150 }} type="text" id="city" placeholder="City" name="city" />
+                        <Field style={{ paddingRight: 150  , color:"black"}} type="text" id="city" placeholder="City" name="city" />
                         <ErrorMessage name="city" component="div" className="error-message" />
                     </div><br></br>
 
@@ -262,11 +358,11 @@ export const Signup = () => {
                     </div>
                     <br></br>
                     <div>
-                        <Field style={{ paddingRight: 150 }} type="text" id="gstNumber" placeholder="GST Number" name="gstNumber" />
+                        <Field style={{ paddingRight: 150  , color:"black"}} type="text" id="gstNumber" placeholder="GST Number" name="gstNumber" />
                         <ErrorMessage name="gstNumber" component="div" className="error-message" />
                     </div><br></br>
 
-                    <button type="submit">Register</button>
+                    <button type="submit" style={{textAlign:"center"}}>Register</button>
                 </Form>
             </Formik>
         </div>

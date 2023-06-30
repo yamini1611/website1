@@ -35,3 +35,7 @@
     font-family: logo;
     src: url(/src/components/fonts/Fontspring-DEMO-proximanova-bold.otf);
   }
+
+  .notesdetail{
+    margin-top: 200px;
+  }

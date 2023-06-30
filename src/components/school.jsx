@@ -1,7 +1,6 @@
 import React from "react";
 import './school.css';
 import axios from 'axios';
-
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -382,7 +381,6 @@ export const ProductDetails = () => {
         navigate("/AddTocart");
       })
       .catch((error) => {
-        // Skip displaying the error alert
         navigate("/AddTocart");
       });
     
@@ -452,7 +450,7 @@ export const ProductDetails = () => {
         <h6 style={{ fontSize: 20, padding: 10, textAlign: "center", fontFamily: "sans-serif", backgroundColor: "black", color: "white" }}>₹Total Price:{getTotalPrice()}</h6>
 
         <div style={{ marginTop: 40 }}>
-          <button type="button" onClick={handleAddToCart}  style={{ marginRight: 5, backgroundColor: 'black', color: 'white', padding: 10 }} >ADD TO CART</button>
+          <button type="button" onClick={handleAddToCart  }   style={{ marginRight: 5, backgroundColor: 'black', color: 'white', padding: 10 }} >ADD TO CART</button>
           <button type="button" style={{ backgroundColor: 'black', color: 'white', padding: 10 }}>BUY NOW</button>
           <div id='carosuel'>
             <h6 id='co4'>Description of product</h6>

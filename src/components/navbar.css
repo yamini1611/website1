@@ -35,7 +35,7 @@ header {
 }
 
 #dd {
-  margin-left: 285px;
+  margin-left: 225px;
   padding-bottom: 500px;
   border-radius: 0%;
   border: none;
@@ -44,7 +44,8 @@ header {
   font-weight: 700;
   text-decoration: none;
   line-height: 32px;
-  background: linear-gradient(to right, #2c3e5000, #1f1e4e 100%);
+  width: 250px;
+  background: linear-gradient(to right, #2c3e5000, #19183d 100%);
 }
 
 
@@ -105,7 +106,6 @@ header {
   padding: 50px;
   padding-left: 50px;
   border-color: #f3eeee;
-  color: #8f8e8e;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 

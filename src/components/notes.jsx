@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './notes.css'
-
+import { Link } from 'react-router-dom';
 const Notes = () => {
   const [notesindex, setnotesindex] = useState([]);
 
@@ -29,11 +29,11 @@ const Notes = () => {
 
             <div className="cards">
 
-              <div className='card-body  text-center '>
+             <Link style={{textDecoration:"none" , color:"white"}} to={`/Notesdetails/${notes.id}`}><div className='card-body  text-center '>
 
-                {notes.title}
+                {notes.title} 
 
-              </div>
+              </div></Link>
 
             </div>
 

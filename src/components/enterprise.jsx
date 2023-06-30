@@ -1,6 +1,7 @@
 import React from "react";
 import './enterprise.css';
 import axios from 'axios';
+
 import Hondaimg from './images/honda.png';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -288,7 +289,7 @@ export const HondaDisplay = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [products, setProduct] = useState(null);
-
+  
 
     useEffect(() => {
         fetch(`http://localhost:4000/Honda/${id}`)
@@ -303,7 +304,6 @@ export const HondaDisplay = () => {
     const handleGoBack = () => {
         navigate('/HondaProducts');
     };
-    
 
         return (
             <div id='divcon' className="clearfix" style={{ marginBottom: 100 }}>
@@ -327,7 +327,7 @@ export const HondaDisplay = () => {
                     </div>
                     <div style={{ marginTop: 70 }}>
                         <label id='quantity' for="number-input">Quantity:</label>
-                        <input style={{ paddingBottom: 0, textAlign: "center" }}placeholder="1" type="number" id="number-input" min="1" step="1" required></input>
+                        <input style={{ paddingBottom: 0, textAlign: "center" }}   placeholder="1" type="number" id="number-input" min="1" step="1" required></input>
                     </div><br></br>
 
                     <div style={{ marginTop: 40 }}>
