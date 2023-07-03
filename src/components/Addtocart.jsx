@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import './Addctocart.css';
+import './CSS/Addctocart.css';
+import {ToastContainer,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Link } from "react-router-dom";
 import { CartContext } from "./CartContext";
-import useCart from "react-use-cart"
 const AddToCart = () => {
   const { cartItems, setCartItems } = useContext(CartContext);
   const [cartItemCount, setCartItemCount] = useState(0);
@@ -43,7 +44,17 @@ const AddToCart = () => {
       .then((response) => response.json())
       .then(() => {
         setCartItems(updatedCartItems);
-        alert("Quantity updated successfully!");
+        toast.success("Quantity Updated Successfully", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          className: 'success-toast',
+          bodyClassName: 'success-toast-body',
+        });
       })
       .catch((error) => console.error("Error updating cart item:", error));
   };
@@ -114,7 +125,18 @@ const AddToCart = () => {
     })
       .then(() => {
         setCartItems(updatedCartItems);
-        alert("Item removed from cart!");
+        toast.success("Product deleted Successfully", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          delay:2000,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          className: 'success-toast',
+          bodyClassName: 'success-toast-body',
+        });
       })
       .catch((error) => console.error("Error removing cart item:", error));
   };
@@ -251,6 +273,7 @@ const AddToCart = () => {
           </div>
         </ul>
       )}
+      <ToastContainer />
     </div>
   );
 };

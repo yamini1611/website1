@@ -45,7 +45,7 @@ header {
   text-decoration: none;
   line-height: 32px;
   width: 250px;
-  background: linear-gradient(to right, #2c3e5000, #19183d 100%);
+  background: linear-gradient(to right, #09052e00, #07062e 100%);
 }
 
 
@@ -64,7 +64,7 @@ header {
 
 @font-face {
   font-family: logo;
-  src: url(./fonts/Fontspring-DEMO-proximanova-medium.otf);
+  src: url(./Fonts/Fontspring-DEMO-proximanova-medium.otf);
 }
 
 #navbarNav {

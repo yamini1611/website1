@@ -1,15 +1,15 @@
 import React from "react";
-import collegebanner from './images/college-banner.jpg';
-import './college.css';
-import img1 from './images/woolen-ball.jpg'
-import img2 from './images/wool.png'
-import img3 from './images/Cotton.png'
-import img4 from './images/Viscose.png'
-import cover from './images/making-banner.jpg'
-import caro1 from './images/caro1.png'
-import caro2 from './images/caro2.png'
-import caro3 from './images/caro3.png'
-import con3 from './images/College-3.jpg'
+import collegebanner from './Images/college-banner.jpg';
+import './CSS/college.css';
+import img1 from './Images/woolen-ball.jpg'
+import img2 from './Images/wool.png'
+import img3 from './Images/Cotton.png'
+import img4 from './Images/Viscose.png'
+import cover from './Images/making-banner.jpg'
+import caro1 from './Images/caro1.png'
+import caro2 from './Images/caro2.png'
+import caro3 from './Images/caro3.png'
+import con3 from './Images/College-3.jpg'
 
 
 

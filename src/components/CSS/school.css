@@ -194,7 +194,7 @@
 }
 @font-face {
     font-family:get ;
-    src: url(./fonts//Blenheim\ Signature\ v2.ttf);
+    src: url(./Fonts//Blenheim\ Signature\ v2.ttf);
 }
 .horizontal-line span {
     color: #978F8F;
@@ -257,3 +257,5 @@ a:hover{
    margin-left: 900px;
    margin-top:100px;
 }
+
+  

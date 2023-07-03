@@ -24,7 +24,7 @@
   
   @font-face {
     font-family: logo-bold;
-    src: url(/src/components/fonts/Fontspring-DEMO-proximanova-bold.otf);
+    src: url(./Fonts/Fontspring-DEMO-proximanova-bold.otf);
   }
   #img-content-1{
     font-family:thin1;
@@ -114,7 +114,7 @@
   
   @font-face {
     font-family:thin1 ;
-    src: url(/src/components/fonts/Fontspring-DEMO-proximanova-thin.otf);
+    src: url(./Fonts/Fontspring-DEMO-proximanova-thin.otf);
   }
   #img-content-11{
     font-family:thin1;

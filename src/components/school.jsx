@@ -1,10 +1,13 @@
 import React from "react";
-import './school.css';
+import './CSS/school.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import size from './images/sizeguide.png'
+import size from './Images/sizeguide.png'
+import {ToastContainer,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function School() {
   return (
     <div>
@@ -377,13 +380,24 @@ export const ProductDetails = () => {
         }
       })
       .then((data) => {
-        alert("Product added to cart:", data);
-        navigate("/AddTocart");
+        toast.success("Product added to cart ", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          className: 'success-toast',
+          bodyClassName: 'success-toast-body',
+        });
+         
       })
       .catch((error) => {
-        navigate("/AddTocart");
+        console.error(error)
       });
-    
+     
+      
     }    
   return (
     <div id='divcon' className="clearfix" style={{ marginBottom: 220 }}>
@@ -451,7 +465,7 @@ export const ProductDetails = () => {
 
         <div style={{ marginTop: 40 }}>
           <button type="button" onClick={handleAddToCart  }   style={{ marginRight: 5, backgroundColor: 'black', color: 'white', padding: 10 }} >ADD TO CART</button>
-          <button type="button" style={{ backgroundColor: 'black', color: 'white', padding: 10 }}>BUY NOW</button>
+          <button type="button"  onClick={handleAddToCart  }   style={{ backgroundColor: 'black', color: 'white', padding: 10 }}>BUY NOW</button>
           <div id='carosuel'>
             <h6 id='co4'>Description of product</h6>
             <h1 id='ca5'>NO RETURNS & NO EXCHANGE.</h1>
@@ -529,7 +543,7 @@ export const ProductDetails = () => {
           </div>
         </div>
       </div>
-
+      <ToastContainer />
     </div>
 
   )

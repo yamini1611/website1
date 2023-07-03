@@ -1,8 +1,8 @@
 import React from "react";
-import './enterprise.css';
+import './CSS/enterprise.css';
 import axios from 'axios';
 
-import Hondaimg from './images/honda.png';
+import Hondaimg from './Images/honda.png';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';

@@ -1,0 +1,103 @@
+.cards {
+
+    background-color: white;
+    margin-left: 5px;
+    padding-left: 23px;
+    width: 565px;
+    color: white;
+    margin-top: 50px;
+    height: 300px;
+    display: inline-flex;
+    box-shadow: 1px 2px 4px rgb(165, 162, 162);
+
+
+}
+
+.card-body {
+    background-color: black;
+    width: 555px;
+    height: 260px;
+    margin-top: -15px;
+    margin-left: -20px;
+    font-size: 14px;
+    padding-top: 110px;
+
+
+}
+
+.blogs {
+    color: black;
+    font-weight: 700;
+    font-family: logo;
+}
+
+@font-face {
+    font-family: logo;
+    src: url(./Fonts/Fontspring-DEMO-proximanova-bold.otf);
+  }
+
+  @font-face {
+    font-family:reg ;
+    src: url(./Fonts/ProximaNova-Regular.otf);
+  }
+ #titlenotes{
+    font-family:reg ;
+    color: black;
+    text-align: center;
+    font-size: 38px;
+ }
+
+ #pnotes{
+    padding:0px  150px  0px 250px;
+    display: block;
+    font-size:14px;
+    font-weight: 400;
+    font-family: reg;
+ }
+
+ #tit2not{
+    font-family:reg ;
+    font-size: 15px;
+    font-weight: 700;
+    padding-left: 250px;
+ }
+
+ #contnotes{
+    font-size: 14px;
+    font-family: reg;
+    padding: 0px 300px 0px 300px;
+ }
+
+ #strong{
+    font-weight: 700;
+ }
+
+ #x{
+    padding: 0px 50px 0px  150px;
+ }
+
+ #post{
+    background-color: rgb(70, 70, 68);
+    border-radius:18px;
+    color: #ffffff;
+    padding: 5px;
+ }
+
+#no{
+   font-family: reg;
+   color:darkgrey;
+   margin: 0px 50px 0px 50px;
+   font-size: 25px;
+}
+
+#hy{
+   width: 150ch;
+margin-left: 20px;
+color: rgb(209, 211, 211);
+}
+
+#hj{
+   font-family: reg;
+   font-weight: 800;
+   color: rgb(146, 146, 144);
+}

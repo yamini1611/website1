@@ -1,8 +1,8 @@
-import home1 from './images/home-1.jpg';
+import home1 from './Images/home-1.jpg';
 import React from "react";
-import home3 from './images/home3.jpg';
-import home4 from './images/home4.jpg';
-import  './homepage.css';
+import home3 from './Images/home3.jpg';
+import home4 from './Images/home4.jpg';
+import  './CSS/homepage.css';
 function home() {
     return (
         <div classNameName="container-breakpoint xs">

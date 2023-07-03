@@ -1,5 +1,5 @@
 import React from "react";
-import './Designuniform.css'
+import './CSS/Designuniform.css'
 
 export default function Designeruniform() {
     return (

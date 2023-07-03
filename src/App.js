@@ -10,6 +10,8 @@ import Notes from './components/notes';
 import Arienmask from './components/arien mask';
 import AddTocart from './components/Addtocart';
 import Notesdetails from "./components/Notesdetails"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div >
@@ -28,8 +30,9 @@ function App() {
         <Route exact path="/Addtocart" element={<AddTocart />} />
         <Route exact path="/Signin" element={<Signin />} />
         <Route exact path="/SignUp" element={<Signup />} />
-        <Route exact path="/Notesdetails"element={<Notesdetails />} />
+        <Route exact path="/Notesdetails/:id"element={<Notesdetails />} />
       </Routes>
+      <ToastContainer />
       <Footer />
     </div>
 

@@ -5,12 +5,12 @@
 
 @font-face {
     font-family: logo-bold;
-    src: url(/src/components/fonts/Fontspring-DEMO-proximanova-bold.otf);
+    src: url(./Fonts/Fontspring-DEMO-proximanova-bold.otf);
   }
 
   @font-face {
     font-family:mediums ;
-    src: url(./fonts/Fontspring-DEMO-proximanova-medium.otf);
+    src: url(./Fonts/Fontspring-DEMO-proximanova-medium.otf);
   }
 #h3{
     position: absolute;
@@ -112,7 +112,7 @@
 }
 @font-face {
     font-family:thin1 ;
-    src: url(/src/components/fonts/Fontspring-DEMO-proximanova-thin.otf);
+    src: url(./Fonts/Fontspring-DEMO-proximanova-thin.otf);
   }
 #h2{
     position: absolute;
@@ -155,7 +155,7 @@
 
 @font-face {
     font-family: get ;
-    src: url(./fonts/Blenheim\ Signature\ v2.ttf);
+    src: url(./Fonts/ProximaNova-Regular.otf);
 }
 
 

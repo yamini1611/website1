@@ -1,5 +1,4 @@
 
-
 #pcart{
     padding: 200px 100px 10px 15px;
     font-size: 30px;
@@ -24,7 +23,7 @@
 
 @font-face {
     font-family:mediums ;
-    src: url(./fonts/Fontspring-DEMO-proximanova-medium.otf);
+    src: url(./Fonts/Fontspring-DEMO-proximanova-medium.otf);
   }
 
   #imgcart{
@@ -46,7 +45,7 @@
 
   @font-face {
     font-family:reg ;
-    src: url(./fonts/ProximaNova-Regular.otf);
+    src: url(./Fonts/ProximaNova-Regular.otf);
   }
   #p1{
     font-family:reg;

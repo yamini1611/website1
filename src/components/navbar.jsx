@@ -1,120 +1,148 @@
 import React, { useState , useEffect } from "react";
-import setting from './images/setting.png';
+import setting from './Images/setting.png';
 import { Link } from 'react-router-dom';
-import './navbar.css';
+import './CSS/navbar.css';
 import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { fakeAuth } from "./Authorization";
+
 const Home = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [cartItemCount, setCartItemCount] = useState(0);
-
+    const navigate = useNavigate();
+  
     const handleDropdownToggle = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-
+      setIsDropdownOpen(!isDropdownOpen);
     };
+  
     useEffect(() => {
-        fetchCartItems();
+      fetchCartItems();
     }, []);
-
+  
     const fetchCartItems = () => {
-        fetch("http://localhost:4000/Cart")
-            .then((response) => response.json())
-            .then((data) => {
-                setCartItemCount(data.length);
-            })
-            .catch((error) => console.error("Error retrieving cart items:", error));
+      fetch("http://localhost:4000/Cart")
+        .then((response) => response.json())
+        .then((data) => {
+          setCartItemCount(data.length);
+        })
+        .catch((error) => console.error("Error retrieving cart items:", error));
     };
+  
+    const handleCartClick = () => {
+      if (fakeAuth.isAuthenticated) {
+        navigate("/Addtocart");
+      } else {
+        navigate("/Signin");
+      }
+    };
+  
     return (
-        <div>
-            <div className="fixed-top">
-                <header>
-                    <Link to='/'><h1 id='title'>acecraft</h1></Link>
-                    <nav className="navbar navbar-expand-lg navbar-light ">
-                        <div className="container-fluid">
-
-                            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                <span className="navbar-toggler-icon"></span>
-                            </button>
-                            <div className="collapse navbar-collapse" id="navbarNav">
-                                <ul className="navbar-nav">
-                                    <li className="nav-item">
-                                        <Link id='nav' style={{ paddingLeft: "10px" }} className="nav-link active" aria-current="page" to="/School" >SCHOOL</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link id='nav' style={{ paddingLeft: "25px" }} className="nav-link" to="/College">COLLEGE</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link id='nav' style={{ paddingLeft: "25px" }} className="nav-link" to="/Enterprise">ENTERPRISE</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link id='nav' style={{ paddingLeft: "25px" }} className="nav-link notes" to="/Notes">NOTES</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link id='nav' style={{ paddingLeft: "25px" }} className="nav-link" to="/Arien-mask" >ARIEN MASK</Link>
-                                    </li>
-                                    <li className="nav-item dropdown">
-                                        <div className={`dropdown ${isDropdownOpen ? 'show' : ''}`} onMouseEnter={handleDropdownToggle} onMouseLeave={handleDropdownToggle}>
-                                            <img style={{ marginTop: -11, marginLeft: 300 }} id='setting' src={setting} alt="" />
-                                            <ul id='dd' className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
-                                                <div className="row">
-                                                    <div className="col-6">
-                                                        <li ><Link id="li" to="/Signin" >Sign In</Link></li></div>
-                                                    <div className="col">
-                                                        <i class="fa-solid fa-right-to-bracket"></i>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-6"><li><Link id="li" to="/Signup">Register</Link></li></div>
-                                                    <div className="col"><i class="fa-solid fa-user-plus"></i></div>
-                                                </div>
-
-                                                <div className="row">
-                                                    <div className="col-6">
-                                                        <li><Link id="li" style={{ display: "inline-block" }} to="/Orderstatus">Order Status</Link></li>
-                                                    </div>
-                                                    <div className="col">
-                                                        <i style={{ marginTop: 20 }} class="fa-solid fa-basket-shopping"></i>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-6">
-                                                        <li><Link id="li" to="/Contact">Contact</Link></li>
-                                                    </div>
-                                                    <div className="col">
-                                                        <i class="fa-solid fa-comments"></i>
-                                                    </div>
-                                                </div>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <Link to="/Addtocart">
-                                            <i id='fa' style={{ paddingLeft: 25, marginTop: -5 }} className="fa-sharp fa-solid fa-cart-shopping">
-                                                {cartItemCount > 0 && (
-                                                    <span id='badge' style={{ fontSize: "12px", marginLeft: -45 }} className="position-absolute top-0 start-100 translate-middle badge rounded-pill">{cartItemCount}</span>
-                                                )}
-                                            </i>
-                                        </Link>
-                                    </li>
-                                </ul>
+      <div>
+        <div className="fixed-top">
+          <header>
+            <Link to='/'><h1 id='title'>acecraft</h1></Link>
+            <nav className="navbar navbar-expand-lg navbar-light ">
+              <div className="container-fluid">
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                  <ul className="navbar-nav">
+                    <li className="nav-item">
+                      <Link id='nav' style={{ paddingLeft: "10px" }} className="nav-link active" aria-current="page" to="/School" >SCHOOL</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link id='nav' style={{ paddingLeft: "25px" }} className="nav-link" to="/College">COLLEGE</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link id='nav' style={{ paddingLeft: "25px" }} className="nav-link" to="/Enterprise">ENTERPRISE</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link id='nav' style={{ paddingLeft: "25px" }} className="nav-link notes" to="/Notes">NOTES</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link id='nav' style={{ paddingLeft: "25px" }} className="nav-link" to="/Arien-mask" >ARIEN MASK</Link>
+                    </li>
+                    <li className="nav-item dropdown">
+                      <div className={`dropdown ${isDropdownOpen ? 'show' : ''}`} onMouseEnter={handleDropdownToggle} onMouseLeave={handleDropdownToggle}>
+                        <img style={{ marginTop: -11, marginLeft: 300 }} id='setting' src={setting} alt="" />
+                        <ul id='dd' className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
+                          {fakeAuth.isAuthenticated ? (
+                            <>
+                              <div className="row">
+                                <div className="col-6">
+                                  <li><button id="li" >Sign Out</button></li>
+                                </div>
+                                <div className="col">
+                                  <i className="fa-solid fa-user-minus"></i>
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="row">
+                                <div className="col-6">
+                                  <li><Link id="li" to="/Signin">Sign In</Link></li>
+                                </div>
+                                <div className="col">
+                                  <i className="fa-solid fa-right-to-bracket"></i>
+                                </div>
+                              </div>
+                              <div className="row">
+                                <div className="col-6"><li><Link id="li" to="/Signup">Register</Link></li></div>
+                                <div className="col"><i className="fa-solid fa-user-plus"></i></div>
+                              </div>
+                            </>
+                          )}
+                          <div className="row">
+                            <div className="col-6">
+                              <li><Link id="li" style={{ display: "inline-block" }} to="/Orderstatus">Order Status</Link></li>
                             </div>
-                        </div>
-                    </nav>
-                </header>
-            </div>
-
+                            <div className="col">
+                              <i style={{ marginTop: 20 }} className="fa-solid fa-basket-shopping"></i>
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col-6">
+                              <li><Link id="li" to="/Contact">Contact</Link></li>
+                            </div>
+                            <div className="col">
+                              <i className="fa-solid fa-comments"></i>
+                            </div>
+                          </div>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <p id='cartButton' onClick={handleCartClick} >
+                        <i id='fa' style={{ paddingLeft: 25, marginTop: -5 }} className="fa-sharp fa-solid fa-cart-shopping">
+                          {cartItemCount > 0 && (
+                            <span id='badge' style={{ fontSize: "12px", marginLeft: -45 }} className="position-absolute top-0 start-100 translate-middle badge rounded-pill">{cartItemCount}</span>
+                          )}
+                        </i>
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          </header>
         </div>
+      </div>
     );
-}
-
-export default Home;
-
+  }
+  
+  export default Home;
 
 
 export function Signin() {
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = (values) => {
     const { email, password } = values;
@@ -129,16 +157,30 @@ export function Signin() {
       })
       .then((registeredUsers) => {
         const user = registeredUsers.find((user) => user.email === email && user.password === password);
-
+      
         if (user) {
-          console.log('Login successful');
-          setError('');
-        } else {
+            
+            toast.success("Login Successfull", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              className: 'success-toast',
+              bodyClassName: 'success-toast-body',
+            });
+          
+            navigate('/Addtocart');
+            setError('');
+          }
+           else {
           setError('Invalid email or password');
         }
       })
       .catch((error) => {
-        console.error('Error retrieving registered details:', error);
+        alert('Error retrieving registered details:', error);
         setError('Error retrieving registered details');
       });
   };
@@ -198,6 +240,7 @@ export function Signin() {
           </button>
         </Form>
       </Formik>
+      
     </div>
   );
 }
