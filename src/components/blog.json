@@ -574,6 +574,14 @@
   ],
   "Cart": [
     {
+      "id": 5,
+      "image": "https://cdn.storehippo.com/s/5997cc7c4d6e8ffa20e50aae/ms.products/5aa0f5c6f04705ab2ca345c6/images/5aa0f5c6f04705ab2ca345c7/5aa0f5d0f04705ab2ca345f9/webp/5aa0f5d0f04705ab2ca345f9-480x480.jpg",
+      "name": "NHG Shirt [Boys, Grade 1-10]",
+      "price": 1425,
+      "size": "24",
+      "quantity": 1
+    },
+    {
       "id": 2,
       "image": "https://cdn.storehippo.com/s/5997cc7c4d6e8ffa20e50aae/601d6e74cbfb666ae1145869/webp/elementary-school-480x480.jpg",
       "name": "CIS Royal Day Wear (Grade 1-5)",
@@ -582,27 +590,19 @@
       "quantity": 1
     },
     {
-      "id": 10,
-      "image": "https://cdn.storehippo.com/s/5997cc7c4d6e8ffa20e50aae/ms.products/5aa0f01491c2e5ab32f33869/images/5aa0f01491c2e5ab32f3386a/5aa0f01e91c2e5ab32f338a4/webp/5aa0f01e91c2e5ab32f338a4-480x480.jpg",
-      "name": "NHG Jumpers [Girls, Grade 1-4]",
+      "id": 12,
+      "image": "https://cdn.storehippo.com/s/5997cc7c4d6e8ffa20e50aae/601ba70c7779a13e481409f5/webp/t4-1-480x480.png",
+      "name": "CIS House T-Shirt (Red)",
       "price": 340,
       "size": "",
       "quantity": 1
     },
     {
-      "id": 18,
-      "image": "https://cdn.storehippo.com/s/5997cc7c4d6e8ffa20e50aae/601baa3e7779a13e48145d18/webp/t5-3-480x480.jpg",
-      "name": "CIS Sports Shorts",
-      "price": 550,
-      "size": "",
-      "quantity": 1
-    },
-    {
-      "id": 1,
-      "image": "https://cdn.storehippo.com/s/5997cc7c4d6e8ffa20e50aae/627bd600820ea897cb5a5cfc/webp/day-wear-polos-480x480.jpg",
-      "name": "NHIS Day Wear Polo [Boys & Girls, Nursery-Grade 5]",
-      "price": 340,
-      "size": "",
+      "id": 11,
+      "image": "https://cdn.storehippo.com/s/5997cc7c4d6e8ffa20e50aae/601d70c2cbfb666ae114a053/webp/yellow-house-t-shirt-480x480.jpg",
+      "name": "CIS House T-Shirt (Yellow)",
+      "price": 1800,
+      "size": "26",
       "quantity": 1
     }
   ],

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import size from './Images/sizeguide.png'
-import {ToastContainer,toast} from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function School() {
@@ -300,7 +300,7 @@ export const ProductDetails = () => {
   const [products, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
-   
+
   useEffect(() => {
     fetch(`http://localhost:4000/products/${id}`)
       .then((response) => response.json())
@@ -355,13 +355,13 @@ export const ProductDetails = () => {
   const handleAddToCart = () => {
     console.log('Selected size:', selectedSize);
     const size = selectedSize;
- 
+
     const productToAdd = {
       id: products.id,
       image: products.image,
       name: products.pname,
       price: getTotalPrice(),
-      size:size,
+      size: size,
       quantity: quantity,
     };
 
@@ -391,14 +391,14 @@ export const ProductDetails = () => {
           className: 'success-toast',
           bodyClassName: 'success-toast-body',
         });
-         
+
       })
       .catch((error) => {
         console.error(error)
       });
-     
-      
-    }    
+
+
+  }
   return (
     <div id='divcon' className="clearfix" style={{ marginBottom: 220 }}>
       <img src={products.image} alt={products.pname} id="pimg" onClick={handleGoBack} class="col-md-5 float-md-start mb-3 ms-md-3 ml-5 "></img>
@@ -458,14 +458,14 @@ export const ProductDetails = () => {
         <div style={{ marginTop: 70 }}>
           <label id='quantity' for="number-input" >Quantity:</label>
 
-          <input  style={{ paddingBottom: 0, textAlign: "center" , color:"black" }} onChange={handleQuantityChange} placeholder="" type="number" id="number-input" min="1" step="1" required></input>
+          <input style={{ paddingBottom: 0, textAlign: "center", color: "black" }} onChange={handleQuantityChange} placeholder="" type="number" id="number-input" min="1" step="1" required></input>
 
         </div><br></br>
         <h6 style={{ fontSize: 20, padding: 10, textAlign: "center", fontFamily: "sans-serif", backgroundColor: "black", color: "white" }}>₹Total Price:{getTotalPrice()}</h6>
 
         <div style={{ marginTop: 40 }}>
-          <button type="button" onClick={handleAddToCart  }   style={{ marginRight: 5, backgroundColor: 'black', color: 'white', padding: 10 }} >ADD TO CART</button>
-          <button type="button"  onClick={handleAddToCart  }   style={{ backgroundColor: 'black', color: 'white', padding: 10 }}>BUY NOW</button>
+          <button type="button" onClick={handleAddToCart} style={{ marginRight: 5, backgroundColor: 'black', color: 'white', padding: 10 }} >ADD TO CART</button>
+          <button type="button" onClick={handleAddToCart} style={{ backgroundColor: 'black', color: 'white', padding: 10 }}>BUY NOW</button>
           <div id='carosuel'>
             <h6 id='co4'>Description of product</h6>
             <h1 id='ca5'>NO RETURNS & NO EXCHANGE.</h1>
@@ -640,12 +640,12 @@ export const ProductList = () => {
                 <img className="img-fluid" src={product.image} height={100} width={350} alt={product.pname} />
               </Link>
               <div className="text-overlay">
-                <button type="button" className="btn btn" style={{ marginLeft: 10, marginTop: 50, backgroundColor: "black", color: "white" }} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" className="btn btn" style={{ marginLeft: 10, marginTop: 50, backgroundColor: "black", color: "white" }} data-bs-toggle="modal" data-bs-target={`#exampleModal${product.id}`}>
                   Quick View
                 </button>
               </div>
             </div>
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id={`exampleModal${product.id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -659,6 +659,10 @@ export const ProductList = () => {
                       </div>
                       <div className="col-6">
                         <h1>{product.pname}</h1>
+                        <h6 ><strong>Product Code: </strong>{product.productcode}</h6>
+                        <h6 ><strong>Brand:</strong>{product.Brand}</h6>
+                        <h6 ><strong>Sold By:</strong>{product.SoldBy}</h6>
+                        <h6 style={{fontFamily: "sans-serif" }}>₹</h6>
                       </div>
                     </div>
                   </div>
@@ -669,8 +673,11 @@ export const ProductList = () => {
               </div>
             </div>
             <h4 id="pname">{product.pname}</h4>
+
+
           </div>
         ))}
+
       </div>
     </div>
   );

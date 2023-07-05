@@ -122,3 +122,12 @@ header {
 #li:hover {
   color: #ffffff;
 }
+
+@font-face {
+  font-family: reg;
+  src: url(./Fonts/ProximaNova-Regular.otf);
+}
+#sh{
+  font-family:reg;
+  margin: 50px 0px 0px 0px ;
+}

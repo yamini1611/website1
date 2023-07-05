@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router';
 import './App.css';
+import { useState } from 'react';
+import {  useNavigate } from 'react-router-dom';
 import Navbar ,{Signin , Signup} from './components/navbar';
 import Homepage from './components/homepage';
 import Footer from './components/footer';
@@ -12,10 +14,28 @@ import AddTocart from './components/Addtocart';
 import Notesdetails from "./components/Notesdetails"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { fakeAuth } from './components/Authorization';
+
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(fakeAuth.isAuthenticated);
+  const navigate = useNavigate();
+
+  const handleSignIn = () => {
+    fakeAuth.login(() => {
+      setIsAuthenticated(true);
+      navigate('/');
+    });
+  };
+
+  const handleSignOut = () => {
+    fakeAuth.logout(() => {
+      setIsAuthenticated(false);
+      navigate('/Signin');
+    });
+  };
   return (
     <div >
-      <Navbar />
+      <Navbar onSignOut={handleSignOut}  />
       <Routes>
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/School" element={<School />} />

@@ -39,7 +39,12 @@ const Home = () => {
         navigate("/Signin");
       }
     };
-  
+    const handleSignOut = () => {
+     
+      fakeAuth.signout(() => {
+        navigate("/Signin");
+      });
+    }
     return (
       <div>
         <div className="fixed-top">
@@ -75,7 +80,7 @@ const Home = () => {
                             <>
                               <div className="row">
                                 <div className="col-6">
-                                  <li><button id="li" >Sign Out</button></li>
+                                  <li><button id="li"onClick={handleSignOut} >Sign Out</button></li>
                                 </div>
                                 <div className="col">
                                   <i className="fa-solid fa-user-minus"></i>
@@ -238,6 +243,8 @@ export function Signin() {
           >
             Login
           </button>
+
+         <h6 id='sh' >Don't have a Account -  <Link to={'/Signup'}>Sign up Now </Link></h6>
         </Form>
       </Formik>
       

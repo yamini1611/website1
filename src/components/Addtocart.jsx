@@ -63,7 +63,7 @@ const AddToCart = () => {
     const updatedCartItem = cartItems.find((item) => item.id === itemId);
     const updatedQuantity = updatedCartItem.quantity - 1;
 
-    if (updatedQuantity >= 0) {
+    if (updatedQuantity >= 1) {
       const updatedPrice =
         (updatedCartItem.price / updatedCartItem.quantity) * updatedQuantity;
       const updatedCartItems = cartItems.map((item) => {
@@ -89,7 +89,17 @@ const AddToCart = () => {
         .then((response) => response.json())
         .then(() => {
           setCartItems(updatedCartItems);
-          alert("Quantity updated successfully!");
+          toast.success("Quantity Updated Successfully", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            className: 'success-toast',
+            bodyClassName: 'success-toast-body',
+          });
         })
         .catch((error) => console.error("Error updating cart item:", error));
     }

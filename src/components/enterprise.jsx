@@ -6,7 +6,7 @@ import Hondaimg from './Images/honda.png';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import Designeruniform from './Designeruniform';
+import Form  from './form';
 
 export default function Enterprice() {
     return (
@@ -175,7 +175,7 @@ function Fourimgblock() {
 
                 <div className="offset-lg-5 mt-n5">
 
-                    <Designeruniform />
+                    <Form />
 
                 </div>
 
