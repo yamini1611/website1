@@ -20,6 +20,7 @@ const Home = () => {
   
     useEffect(() => {
       fetchCartItems();
+      setInterval(fetchCartItems, 2000); 
     }, []);
   
     const fetchCartItems = () => {
