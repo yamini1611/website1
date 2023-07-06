@@ -25,7 +25,7 @@ function Honda() {
 
     const [mensindex, setmensindex] = useState([]);
     const fetchData = () => {
-        fetch('http://localhost:4000/mens')
+        fetch('https://acecraft-deploy-tkgw.onrender.com/mens')
             .then((response) => response.json())
             .then((data) => {
                 setmensindex(data);
@@ -85,7 +85,7 @@ function Honda() {
 function Steps() {
     const [stepsindex, setstepsindex] = useState([]);
     const fetchData = () => {
-        fetch('http://localhost:4000/steps')
+        fetch('https://acecraft-deploy-tkgw.onrender.com/steps')
             .then((response) => response.json())
             .then((data) => {
                 setstepsindex(data);
@@ -143,7 +143,7 @@ function Steps() {
 function Fourimgblock() {
     const [fourimgindex, setfourimgindex] = useState([]);
     const fetchData = () => {
-        fetch('http://localhost:4000/four')
+        fetch('https://acecraft-deploy-tkgw.onrender.com/four')
             .then((response) => response.json())
             .then((data) => {
                 setfourimgindex(data);
@@ -193,7 +193,7 @@ export const HondaProducts = () => {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/Honda')
+            .get('https://acecraft-deploy-tkgw.onrender.com/Honda')
             .then((response) => {
                 console.log(response.data);
                 setProducts(response.data);
@@ -292,7 +292,7 @@ export const HondaDisplay = () => {
   
 
     useEffect(() => {
-        fetch(`http://localhost:4000/Honda/${id}`)
+        fetch(`https://acecraft-deploy-tkgw.onrender.com/Honda/${id}`)
             .then((response) => response.json())
             .then((data) => setProduct(data));
     }, [id]);

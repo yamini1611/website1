@@ -6,8 +6,7 @@ const Notesdetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    // Fetch the data for the specific id (replace 'http://localhost:4000/blog' with your API endpoint)
-    fetch(`http://localhost:4000/blog/${id}`)
+    fetch(`https://acecraft-deploy-tkgw.onrender.com/Blog/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setTitle(data.title);

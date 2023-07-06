@@ -29,7 +29,7 @@ export function Fixed1() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/school');
+      const response = await axios.get('https://acecraft-deploy-tkgw.onrender.com/school');
       setschoolindex(response.data)
     }
     catch (error) {
@@ -302,7 +302,7 @@ export const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/products/${id}`)
+    fetch(`https://acecraft-deploy-tkgw.onrender.com/products/${id}`)
       .then((response) => response.json())
       .then((data) => setProduct(data));
   }, [id]);
@@ -365,7 +365,7 @@ export const ProductDetails = () => {
       quantity: quantity,
     };
 
-    fetch("http://localhost:4000/Cart", {
+    fetch("https://acecraft-deploy-tkgw.onrender.com/Cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -552,12 +552,15 @@ export const ProductDetails = () => {
 
 
 export const ProductList = () => {
-  const [products, setProducts] = useState([]);
+  const [product, setProducts] = useState([]);
   const [sortOption, setSortOption] = useState('');
+  const [selectedSize, setSelectedSize] = useState('');
+  const [quantity, setQuantity] = useState(1);
+
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/products')
+      .get('https://acecraft-deploy-tkgw.onrender.com/products')
       .then((response) => {
         console.log(response.data);
         setProducts(response.data);
@@ -572,7 +575,7 @@ export const ProductList = () => {
   }, [sortOption]);
 
   const sortProducts = () => {
-    let sortedProducts = [...products];
+    let sortedProducts = [...product];
 
     switch (sortOption) {
       case 'lowToHigh':
@@ -594,11 +597,93 @@ export const ProductList = () => {
     setProducts(sortedProducts);
   };
 
+  const handleSizeChange = (event) => {
+    const selectedSize = event.target.value;
+    setSelectedSize(selectedSize);
+  };
+
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
   };
+  const handleQuantityChange = (event) => {
+    const quantity = parseInt(event.target.value);
+    setQuantity(quantity);
+  };
+  const getUpdatedRetailPrice = () => {
+    if (!selectedSize) {
+      return product.Retailprice;
+    }
 
-  if (!products || products.length === 0) {
+    const basePrice = product.Retailprice;
+
+    if (selectedSize === "22") {
+      return basePrice * 2;
+    } else if (selectedSize === "24") {
+      return basePrice * 3;
+    } else if (selectedSize === "26") {
+      return basePrice * 4;
+    } else if (selectedSize === "28") {
+      return basePrice * 5;
+    } else if (selectedSize === "30") {
+      return basePrice * 6;
+    }
+
+    return basePrice;
+  };
+  const getTotalPrice = () => {
+    const retailPrice = getUpdatedRetailPrice();
+    return retailPrice * quantity;
+  };
+
+  const handleAddToCart = () => {
+    console.log('Selected size:', selectedSize);
+    const size = selectedSize;
+
+    const productToAdd = {
+      id: product.id,
+      image: product.image,
+      name: product.pname,
+      price: getTotalPrice(),
+      size: size,
+      quantity: quantity,
+    };
+
+    fetch("https://acecraft-deploy-tkgw.onrender.com/Cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productToAdd),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Error adding product to cart");
+        }
+      })
+      .then((data) => {
+        toast.success("Product added to cart ", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          className: 'success-toast',
+          bodyClassName: 'success-toast-body',
+        });
+
+      })
+      .catch((error) => {
+        console.error(error)
+      });
+
+
+  }
+
+  if (!product || product.length === 0) {
     return <div>Loading...</div>;
   }
 
@@ -627,13 +712,13 @@ export const ProductList = () => {
         <option value="nameAscending">Name: Ascending Order</option>
         <option value="nameDescending">Name: Descending Order</option>
       </select>
-      <div style={{ paddingLeft: 130, marginTop: 200 }}>
+      <div style={{ paddingLeft: 140, marginTop: 200 }}>
         <h5 id="ti" style={{ marginTop: -200, paddingBottom: 30 }}>
           SCHOOL <span style={{ fontFamily: 'initial', fontWeight: 100, color: 'gray' }}>-44 items</span>
         </h5>
         <h5 id="ti">NEW HORIZON GURUKUL</h5>
 
-        {products.map((product) => (
+        {product.map((product) => (
           <div key={product.id} style={{ marginLeft: 10, marginBottom: 30, display: 'inline-block', flexDirection: 'col' }}>
             <div className="image-container">
               <Link to={`/ProductDetails/${product.id}`} style={{ textDecoration: 'none' }}>
@@ -646,23 +731,42 @@ export const ProductList = () => {
               </div>
             </div>
             <div className="modal fade" id={`exampleModal${product.id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div className="modal-dialog modal-lg">
+  <div className="modal-dialog custom-modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header">
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body">
+        <div className="row">
+          <div className="col-6">
+            <img id="modimg" src={product.image} alt="" height={550} width={500} />
+          </div>
+          <div className="col-6">
+            <h1>{product.pname}</h1>
+            <h6><strong>Product Code: </strong>{product.productcode}</h6>
+            <h6><strong>Brand:</strong>{product.Brand}</h6>
+            <h6><strong>Sold By:</strong>{product.SoldBy}</h6>
+            <br></br><hr></hr>
+            <div className="d-flex">
+              <h6 id='rpr'>₹{product.Retailprice}</h6>
+              <h5 id='offer'>40% OFF</h5>
+              <h3 id='mrp'>₹{product.mrp}</h3>
+            </div>
+            <hr></hr>
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+              <div className="modal-dialog modal-xxl" style={{ zIndex: "1050" }}>
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel" style={{ fontFamily: "courier new", paddingLeft: 150, fontWeight: "400", fontSize: 45 }}>acecraft</h5>
+                    <h5 className="modal-title" id="exampleModalLabel1" style={{ fontFamily: "courier new", paddingLeft: 150, fontWeight: "400", fontSize: 45 }}>acecraft</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
                     <div className="row">
                       <div className="col-6">
-                        <img src={product.image} alt="" height={300} width={300} />
+                        <img src={size} alt="" height={300} width={300}></img>
                       </div>
-                      <div className="col-6">
-                        <h1>{product.pname}</h1>
-                        <h6 ><strong>Product Code: </strong>{product.productcode}</h6>
-                        <h6 ><strong>Brand:</strong>{product.Brand}</h6>
-                        <h6 ><strong>Sold By:</strong>{product.SoldBy}</h6>
-                        <h6 style={{fontFamily: "sans-serif" }}>₹</h6>
+                      <div className="col-6 ">
+                        <img style={{ marginLeft: 50 }} src={product.image} alt="" height={170} width={170}></img>
                       </div>
                     </div>
                   </div>
@@ -672,6 +776,42 @@ export const ProductList = () => {
                 </div>
               </div>
             </div>
+            <button type="button" className="btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              SIZE GUIDE
+            </button>
+           <div className="d-flex">
+           <label id='lab' className="option-name">
+          <span  className="ng-binding">Size:</span>
+        </label>
+            <div className="option-values1" id='opmodal' > 
+          <select value={selectedSize} onChange={handleSizeChange}  className="form-control ng-pristine ng-valid ng-touched">
+            <option value="20" disabled>Please Select</option>
+            <option value="22">22</option>
+            <option value="24">24</option>
+            <option value="26">26</option>
+            <option value="28">28</option>
+            <option value="30">30</option>
+
+          </select>
+        </div>
+            </div>
+
+            <div style={{ marginTop: 10,padding:10 }}>
+          <label id='quantity' for="number-input" >Quantity:</label>
+
+          <input style={{  color: "black" }} onChange={handleQuantityChange} placeholder="" type="number"  min="1" step="1" required></input>
+
+        </div><br></br>
+            </div>
+        </div>
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
             <h4 id="pname">{product.pname}</h4>
 
 
@@ -682,6 +822,8 @@ export const ProductList = () => {
     </div>
   );
 };
+
+
 
 
 

@@ -9,7 +9,6 @@ import axios from "axios";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { fakeAuth } from "./Authorization";
-
 const Home = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [cartItemCount, setCartItemCount] = useState(0);
@@ -24,7 +23,7 @@ const Home = () => {
     }, []);
   
     const fetchCartItems = () => {
-      fetch("http://localhost:4000/Cart")
+      fetch("https://acecraft-deploy-tkgw.onrender.com/Cart")
         .then((response) => response.json())
         .then((data) => {
           setCartItemCount(data.length);
@@ -152,7 +151,7 @@ export function Signin() {
   const handleSubmit = (values) => {
     const { email, password } = values;
 
-    fetch('http://localhost:4000/Register')
+    fetch('https://acecraft-deploy-tkgw.onrender.com/Register')
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -259,7 +258,7 @@ export const Signup = () => {
         console.log(values);
       
         axios
-          .post('http://localhost:4000/Register', values)
+          .post('https://acecraft-deploy-tkgw.onrender.com/Register', values)
           .then((response) => {
             if (response.status === 200) {
               alert('User registered:', response.data);
@@ -418,5 +417,7 @@ export const Signup = () => {
         </div>
     );
 };
+
+
 
 

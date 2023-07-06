@@ -258,4 +258,55 @@ a:hover{
    margin-top:100px;
 }
 
+
+.custom-modal-dialog {
+    max-width: 1100px; 
+    width: 100%;
+  }
+
+  #modimg{
+    border: solid;
+    border-radius: 8px;
+    padding: 25px;
+    border-width: 0.1ch;
+    border-color: #ddc9c9;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3); /* Define your box shadow here */
+
+  }
+
+  #mrp{
+    text-decoration: line-through;
+    padding-left: 15px;
+    font-family: reg;
+    padding-top: 5px;
+  }
+  
+
+  #opmodal{
+    margin-top: 30px;
+    
+  }
+@font-face {
+    font-family: reg;
+    src: url(./Fonts/ProximaNova-Regular.otf);
+}
+  #rpr{
+    font-size: 35px;
+    font-family: reg;
+  }
+
+  #offer{
+    padding-left: 25px;
+    font-family: reg;
+    font-size: 15px;
+    padding-top: 12px;
+  }
+  #lab{
+    display:"block" ;
+    margin-top:22px;
+     padding:15px ;
+     background-color:#000;
+     color: #fcfafa;
+  }
+
   

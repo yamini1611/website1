@@ -6,7 +6,7 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/Cart")
+    fetch("https://acecraft-deploy-tkgw.onrender.com/Cart")
       .then((response) => response.json())
       .then((data) => {
         setCartItems(data);
@@ -28,7 +28,7 @@ export const CartProvider = ({ children }) => {
       return item;
     });
 
-    fetch(`http://localhost:4000/Cart/${itemId}`, {
+    fetch(`https://acecraft-deploy-tkgw.onrender.com/Cart/${itemId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ export const CartProvider = ({ children }) => {
         return item;
       });
 
-      fetch(`http://localhost:4000/Cart/${itemId}`, {
+      fetch(`https://acecraft-deploy-tkgw.onrender.com/Cart/${itemId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export const CartProvider = ({ children }) => {
   const removeCartItem = (itemId) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
 
-    fetch(`http://localhost:4000/Cart/${itemId}`, {
+    fetch(`https://acecraft-deploy-tkgw.onrender.com/Cart/${itemId}`, {
       method: "DELETE",
     })
       .then(() => {

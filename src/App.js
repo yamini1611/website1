@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router';
 import './App.css';
 import { useState } from 'react';
 import {  useNavigate } from 'react-router-dom';
-import Navbar ,{Signin , Signup} from './components/navbar';
+import Navbar ,{ Signin , Signup} from './components/navbar';
 import Homepage from './components/homepage';
 import Footer from './components/footer';
 import School, { ProductDetails, ProductList } from './components/school';
@@ -15,6 +15,7 @@ import Notesdetails from "./components/Notesdetails"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { fakeAuth } from './components/Authorization';
+import Orderstatus from './components/Orderstatus';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(fakeAuth.isAuthenticated);
@@ -50,6 +51,8 @@ function App() {
         <Route exact path="/Addtocart" element={<AddTocart />} />
         <Route exact path="/Signin" element={<Signin />} />
         <Route exact path="/SignUp" element={<Signup />} />
+        <Route exact path="/Orderstatus" element={<Orderstatus />} />
+        <Route exact path="/Orderstatus" element={<Orderstatus />} />
         <Route exact path="/Notesdetails/:id"element={<Notesdetails />} />
       </Routes>
       <ToastContainer />
